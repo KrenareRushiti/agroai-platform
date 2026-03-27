@@ -1,3 +1,9 @@
+import React, { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { motion, AnimatePresence } from 'framer-motion';
+import { ArrowRight, ShoppingCart, Battery, Maximize, Cpu, Wifi, Zap } from 'lucide-react';
+import drone1 from '../../assets/drone1.png';
+import drone2 from '../../assets/drone2.png';
 import './Products.css';
 import API_URL from '../../config';
 

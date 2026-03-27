@@ -1,3 +1,5 @@
+import React, { useState, useRef, useEffect } from 'react';
+import { MessageSquare, X, Send, Brain, User, ChevronDown } from 'lucide-react';
 import './AIAssistant.css';
 import API_URL from '../config';
 

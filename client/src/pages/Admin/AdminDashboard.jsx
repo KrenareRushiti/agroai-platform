@@ -1,3 +1,6 @@
+import React, { useState } from 'react';
+import { motion } from 'framer-motion';
+import { BarChart3, Package, FileText, MessageSquare, Database, Users, Plus, Edit2, Trash2, Eye, TrendingUp, DollarSign, Globe, Activity, Lock, LogIn, ChevronDown, Image, Save } from 'lucide-react';
 import './AdminDashboard.css';
 import API_URL from '../../config';
 
@@ -36,10 +39,10 @@ const AdminDashboard = () => {
 
     // Mock data for other sections
     const [drones, setDrones] = useState([
-        { id: 1, name: 'AeroScout X1', price: '$4,999', category: 'Monitoring', status: 'Active' },
-        { id: 2, name: 'AgroSpray Pro', price: '$12,499', category: 'Spraying', status: 'Active' },
-        { id: 3, name: 'TerraScan Elite', price: '$8,999', category: 'Mapping', status: 'Active' },
-        { id: 4, name: 'HarvestGuard Max', price: '$24,999', category: 'Enterprise', status: 'Active' },
+        { id: 1, name: 'AeroScout X1', price: '€4,999', category: 'Monitoring', status: 'Active' },
+        { id: 2, name: 'AgroSpray Pro', price: '€12,499', category: 'Spraying', status: 'Active' },
+        { id: 3, name: 'TerraScan Elite', price: '€8,999', category: 'Mapping', status: 'Active' },
+        { id: 4, name: 'HarvestGuard Max', price: '€24,999', category: 'Enterprise', status: 'Active' },
     ]);
 
     const [blogPosts, setBlogPosts] = useState([

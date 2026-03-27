@@ -35,7 +35,7 @@ const Home = () => {
 
     const testimonials = [
         { name: 'Dr. Maria Santos', role: 'Menaxhere Ferme, GreenField Estates', text: 'Dronët e AeroAgro AI rritën rendimentin tonë me 35% në sezonin e parë. Rekomandimet e IA janë jashtëzakonisht të sakta.', rating: 5 },
-        { name: 'James O\'Brien', role: 'CEO, AgriTech Farms', text: 'Spërkatja precize na kurseu 200,000$ në vit. Kjo teknologji është e ardhmja e bujqësisë së qëndrueshme.', rating: 5 },
+        { name: 'James O\'Brien', role: 'CEO, AgriTech Farms', text: 'Spërkatja precize na kurseu 200,000€ në vit. Kjo teknologji është e ardhmja e bujqësisë së qëndrueshme.', rating: 5 },
         { name: 'Aisha Patel', role: 'Drejtoreshë, SmartHarvest Inc.', text: 'Mbështetja dhe inteligjenca e tyre e dronëve i tejkaluan të gjitha pritjet. Rikthimi i investimit tonë u arrit brenda 6 muajsh.', rating: 5 },
     ];
 
