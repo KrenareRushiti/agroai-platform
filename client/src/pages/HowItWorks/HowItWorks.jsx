@@ -60,7 +60,7 @@ const HowItWorks = () => {
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
                         <span className="section-tag">Si Funksionon</span>
-                        <h1>Nga Ngritja te <span className="gradient-text">Konkluzionet e Veprueshme</span></h1>
+                        <h1>Nga Fluturimi te <span className="gradient-text">Analiza Inteligjente</span></h1>
                         <p>Zbuloni procesin me pesë hapa që transformon të dhënat e papërpunuara të fushës në vendime inteligjente bujqësore.</p>
                     </motion.div>
 
