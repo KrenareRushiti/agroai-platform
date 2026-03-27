@@ -131,6 +131,33 @@
     margin: 0 auto 2rem;
 }
 
+.hiw-video-container {
+    margin-top: 3rem;
+    max-width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hiw-video-wrapper {
+    position: relative;
+    border-radius: 20px;
+    overflow: hidden;
+    aspect-ratio: 16/9;
+}
+
+.hiw-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.video-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(10, 27, 43, 0.4) 0%, transparent 50%, rgba(10, 27, 43, 0.6) 100%);
+    pointer-events: none;
+}
+
 @media (max-width: 768px) {
     .step-content {
         flex-direction: column;
@@ -139,6 +166,10 @@
 
     .step-card {
         gap: 1.5rem;
+    }
+
+    .hiw-video-wrapper {
+        aspect-ratio: 4/3;
     }
 }
 

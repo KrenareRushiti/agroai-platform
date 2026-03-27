@@ -2,7 +2,6 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Smartphone, Plane, Camera, Brain, BarChart3, ArrowRight, ChevronDown } from 'lucide-react';
-import DroneSimulation from '../../components/DroneSimulation';
 import './HowItWorks.css';
 
 const fadeUp = {
@@ -66,12 +65,18 @@ const HowItWorks = () => {
                     </motion.div>
 
                     <motion.div
-                        initial={{ opacity: 0, scale: 0.95 }}
-                        animate={{ opacity: 1, scale: 1 }}
+                        className="hiw-video-container"
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.4 }}
-                        style={{ marginTop: '50px' }}
                     >
-                        <DroneSimulation />
+                        <div className="hiw-video-wrapper glass">
+                            <video autoPlay loop muted playsInline className="hiw-video">
+                                <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ec42c957-dd34-483b-8545-802d3f6a5160.mp4" type="video/mp4" />
+                                <source src="https://www-cdn.djiits.com/assets/uploads/8e4bb7660b454b7176025523cebdcd80.mp4" type="video/mp4" />
+                            </video>
+                            <div className="video-overlay" />
+                        </div>
                     </motion.div>
                 </div>
             </section>
