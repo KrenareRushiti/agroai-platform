@@ -12,66 +12,66 @@ const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
 const plans = [
     {
-        name: 'Starter',
-        price: '$299',
-        period: '/month',
-        description: 'Perfect for small farms getting started with drone monitoring.',
+        name: 'Fillestar',
+        price: '€299',
+        period: '/muaj',
+        description: 'E përkryer për ferma të vogla që sapo nisin monitorimin me dron.',
         features: [
-            { text: 'AeroScout X1 Basic drone', included: true },
-            { text: 'Farm monitoring (up to 100 acres)', included: true },
-            { text: 'Basic AI analytics', included: true },
-            { text: 'Weekly flight reports', included: true },
-            { text: 'Mobile app access', included: true },
-            { text: 'Precision spraying', included: false },
-            { text: 'Multi-spectral imaging', included: false },
-            { text: 'Fleet management', included: false },
-            { text: 'Dedicated support', included: false },
+            { text: 'Dron baze AeroScout X1', included: true },
+            { text: 'Monitorim i fermës (deri në 100 akra)', included: true },
+            { text: 'Analitikë bazë e IA', included: true },
+            { text: 'Raporte fluturimi javore', included: true },
+            { text: 'Qasje në aplikacion celular', included: true },
+            { text: 'Spërkatje me precizion', included: false },
+            { text: 'Imazhe multispektrale', included: false },
+            { text: 'Menaxhimi i flotës', included: false },
+            { text: 'Mbështetje e dedikuar', included: false },
         ],
         popular: false,
     },
     {
-        name: 'Professional',
-        price: '$799',
-        period: '/month',
-        description: 'For growing operations needing advanced analytics and spraying.',
+        name: 'Profesional',
+        price: '€799',
+        period: '/muaj',
+        description: 'Për operacione në rritje që kanë nevojë për analitikë të avancuar dhe spërkatje.',
         features: [
             { text: 'AeroScout X1 + AgroSpray Pro', included: true },
-            { text: 'Farm monitoring (up to 500 acres)', included: true },
-            { text: 'Full AI analytics suite', included: true },
-            { text: 'Daily AI reports', included: true },
-            { text: 'Precision spraying', included: true },
-            { text: 'Multi-spectral imaging', included: true },
-            { text: 'Priority support', included: true },
-            { text: 'Fleet management', included: false },
-            { text: 'Dedicated account manager', included: false },
+            { text: 'Monitorim i fermës (deri në 500 akra)', included: true },
+            { text: 'Paketa e plotë e analitikës së IA', included: true },
+            { text: 'Raporte ditore të IA', included: true },
+            { text: 'Spërkatje me precizion', included: true },
+            { text: 'Imazhe multispektrale', included: true },
+            { text: 'Mbështetje me prioritet', included: true },
+            { text: 'Menaxhimi i flotës', included: false },
+            { text: 'Menaxher i dedikuar llogarie', included: false },
         ],
         popular: true,
     },
     {
-        name: 'Enterprise',
-        price: '$1,999',
-        period: '/month',
-        description: 'Full automation for large-scale agricultural operations.',
+        name: 'Ndërmarrje',
+        price: '€1,999',
+        period: '/muaj',
+        description: 'Automatizim i plotë për operacione bujqësore në shkallë të gjerë.',
         features: [
-            { text: 'Full drone fleet (up to 5 drones)', included: true },
-            { text: 'Unlimited coverage area', included: true },
-            { text: 'Enterprise AI analytics', included: true },
-            { text: 'Real-time monitoring & alerts', included: true },
-            { text: 'Full precision spraying', included: true },
-            { text: 'Multi-spectral + thermal imaging', included: true },
-            { text: 'Fleet coordination AI', included: true },
-            { text: 'Dedicated account manager', included: true },
-            { text: '24/7 premium support', included: true },
+            { text: 'Flotë e plotë dronësh (deri në 5 dronë)', included: true },
+            { text: 'Zonë mbulimi e pakufizuar', included: true },
+            { text: 'Analitikë IA për ndërmarrje', included: true },
+            { text: 'Monitorim dhe sinjalizime në kohë reale', included: true },
+            { text: 'Spërkatje e plotë me precizion', included: true },
+            { text: 'Imazhe multispektrale + termike', included: true },
+            { text: 'IA për koordinimin e flotës', included: true },
+            { text: 'Menaxher i dedikuar llogarie', included: true },
+            { text: 'Mbështetje premium 24/7', included: true },
         ],
         popular: false,
     },
 ];
 
 const faqs = [
-    { q: 'Can I switch plans later?', a: 'Yes, you can upgrade or downgrade at any time. Changes take effect at the start of your next billing cycle.' },
-    { q: 'Is there a free trial?', a: 'We offer a 14-day free trial on the Professional plan. Book a demo to get started.' },
-    { q: 'Do drones come with the plan?', a: 'Plans include drone leasing. You can also purchase drones outright and use our software platform separately.' },
-    { q: 'What happens if a drone is damaged?', a: 'Our Enterprise plan includes comprehensive insurance. Starter and Pro plans offer optional damage protection add-ons.' },
+    { q: 'A mund ta ndryshoj planin më vonë?', a: 'Po, ju mund të përmirësoni ose të ulni vizualizimin në çdo kohë. Ndryshimet hyjnë në fuqi në fillim të ciklit tuaj të ardhshëm të faturimit.' },
+    { q: 'A ka një provë falas?', a: 'Ne ofrojmë një provë 14-ditore falas në planin Profesional. Rezervoni një demo për të filluar.' },
+    { q: 'A vijnë dronët me planin?', a: 'Planet përfshijnë dhënien me qira të dronëve. Ju gjithashtu mund të blini dronë direkt dhe të përdorni platformën tonë të softuerit veçmas.' },
+    { q: 'Çfarë ndodh nëse një dron dëmtohet?', a: 'Plani ynë i Ndërmarrjes përfshin sigurim gjithëpërfshirës. Planet Fillestar dhe Profesional ofrojnë shtesa opsionale për mbrojtjen nga dëmtimet.' },
 ];
 
 const Pricing = () => {
@@ -82,9 +82,9 @@ const Pricing = () => {
             <section className="pricing-hero">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
-                        <span className="section-tag">Pricing</span>
-                        <h1>Simple, Transparent <span className="gradient-text">Pricing</span></h1>
-                        <p>Choose the plan that fits your farm. Scale up or down anytime.</p>
+                        <span className="section-tag">Çmimet</span>
+                        <h1>Çmime të Thjeshta dhe <span className="gradient-text">Transparente</span></h1>
+                        <p>Zgjidhni planin që i përshtatet fermës suaj. Rrituni ose zvogëlohuni në çdo kohë.</p>
                     </motion.div>
                 </div>
             </section>
@@ -94,7 +94,7 @@ const Pricing = () => {
                     <motion.div className="pricing-grid" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
                         {plans.map((plan, i) => (
                             <motion.div key={i} className={`pricing-card glass ${plan.popular ? 'popular' : ''}`} variants={fadeUp} custom={i}>
-                                {plan.popular && <div className="popular-badge">Most Popular</div>}
+                                {plan.popular && <div className="popular-badge">Më i Popullarizuari</div>}
                                 <h3>{plan.name}</h3>
                                 <div className="pricing-amount">
                                     <span className="price">{plan.price}</span>
@@ -110,7 +110,7 @@ const Pricing = () => {
                                     ))}
                                 </ul>
                                 <Link to="/contact" className={plan.popular ? 'btn-primary full-width' : 'btn-outline full-width'} id={`pricing-cta-${plan.name.toLowerCase()}`}>
-                                    Get Started <ArrowRight size={18} />
+                                    Fillo Tani <ArrowRight size={18} />
                                 </Link>
                             </motion.div>
                         ))}
@@ -122,8 +122,8 @@ const Pricing = () => {
             <section className="section-padding faq-section">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                        <span className="section-tag">FAQ</span>
-                        <h2>Frequently Asked <span className="gradient-text">Questions</span></h2>
+                        <span className="section-tag">Pyetjet e Shpeshta (FAQ)</span>
+                        <h2>Pyetjet e Bëra <span className="gradient-text">Më Shpesh</span></h2>
                     </motion.div>
                     <motion.div className="faq-list" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={stagger}>
                         {faqs.map((faq, i) => (

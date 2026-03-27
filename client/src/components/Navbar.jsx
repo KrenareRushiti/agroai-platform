@@ -17,13 +17,13 @@ const Navbar = () => {
     }, []);
 
     const navLinks = [
-        { name: 'Home', path: '/' },
-        { name: 'Products', path: '/products' },
-        { name: 'How It Works', path: '/how-it-works' },
-        { name: 'About', path: '/about' },
-        { name: 'Pricing', path: '/pricing' },
-        { name: 'Blog', path: '/blog' },
-        { name: 'Contact', path: '/contact' },
+        { name: 'Kryefaqja', path: '/' },
+        { name: 'Produktet', path: '/products' },
+        { name: 'Si Funksionon', path: '/how-it-works' },
+        { name: 'Rreth Nesh', path: '/about' },
+        { name: 'Kontakti', path: '/contact' },
+        { name: 'Blogu', path: '/blog' },
+        { name: 'Paneli', path: '/dashboard' },
     ];
 
     return (

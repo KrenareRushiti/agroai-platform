@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { ArrowRight, Leaf, Zap, BarChart3, Shield, Eye, Target, Sprout, Brain, Satellite, Users, Star, ChevronRight } from 'lucide-react';
-import heroImg from '../../assets/hero_drone.png';
+import { ArrowRight, Leaf, Zap, BarChart3, Shield, Eye, Target, Sprout, Brain, Satellite, Users, Star, ChevronRight, Calculator } from 'lucide-react';
 import './Home.css';
 
 const fadeUp = {
@@ -20,76 +19,55 @@ const stagger = {
 
 const Home = () => {
     const benefits = [
-        { icon: <Leaf size={28} />, title: 'Eco-Friendly Farming', desc: 'Reduce pesticide use by 60% with precision AI targeting.' },
-        { icon: <Zap size={28} />, title: 'Lightning-Fast Scans', desc: 'Cover 500 acres in under an hour with autonomous flight.' },
-        { icon: <BarChart3 size={28} />, title: 'Data-Driven Insights', desc: 'AI analytics that turn farm data into actionable intelligence.' },
-        { icon: <Shield size={28} />, title: 'Crop Protection', desc: 'Early disease detection saves up to 40% of potential yield loss.' },
-        { icon: <Eye size={28} />, title: 'Real-Time Monitoring', desc: 'Live feeds and alerts keep you connected to your fields 24/7.' },
-        { icon: <Target size={28} />, title: 'Precision Spraying', desc: 'AI-guided nozzles deliver exactly what each plant needs.' },
+        { icon: <Leaf size={28} />, title: 'Bujqësi ekonomike', desc: 'Zvogëloni përdorimin e pesticideve me 60% me shënjestrim preciz.' },
+        { icon: <Zap size={28} />, title: 'Skanime të shpejta', desc: 'Mbuloni 500 akra nën një orë me fluturim autonom.' },
+        { icon: <BarChart3 size={28} />, title: 'Drejtuar nga të dhënat', desc: 'Analiza e IA që i kthen të dhënat e fermës në inteligjencë të zbatueshme.' },
+        { icon: <Shield size={28} />, title: 'Mbrojtja e të mbjellave', desc: 'Zbulimi i hershëm i sëmundjeve kursen deri në 40% të humbjes së prodhimit.' },
+        { icon: <Eye size={28} />, title: 'Monitorim në kohë reale', desc: 'Lidhjet e drejtpërdrejta dhe alarmet ju mbajnë të lidhur me fushat tuaja 24/7.' },
+        { icon: <Target size={28} />, title: 'Spërkatje me precizion', desc: 'Grykat e udhëzuara nga IA ofrojnë atë që i nevojitet çdo bime.' },
     ];
 
     const features = [
-        { icon: <Brain size={28} />, title: 'AI Vision Engine', desc: 'GPT-powered crop analysis identifies plant stress, disease, and nutrient deficiency in real-time.' },
-        { icon: <Satellite size={28} />, title: 'Multi-Spectral Imaging', desc: 'NDVI and thermal sensors capture data invisible to the human eye.' },
-        { icon: <Sprout size={28} />, title: 'Growth Tracking', desc: 'Track crop development from seed to harvest with historical comparisons.' },
+        { icon: <Brain size={28} />, title: 'Motori i vizualizimit me AI', desc: 'Analiza e të mbjellave me GPT identifikon problemet, sëmundjet dhe mungesën e lëndëve ushqyese në kohë reale.' },
+        { icon: <Satellite size={28} />, title: 'Imazhe shumë-spektrale', desc: 'Sensorët NDVI dhe termikë kapin të dhëna të padukshme për syrin e njeriut.' },
+        { icon: <Sprout size={28} />, title: 'Gjurmimi i rritjes', desc: 'Ndiqni zhvillimin e të mbjellave nga fara deri te vjelja me krahasime historikësh.' },
     ];
 
     const testimonials = [
-        { name: 'Dr. Maria Santos', role: 'Farm Manager, GreenField Estates', text: 'AeroAgro AI drones increased our yield by 35% in the first season. The AI recommendations are incredibly accurate.', rating: 5 },
-        { name: 'James O\'Brien', role: 'CEO, AgriTech Farms', text: 'The precision spraying alone saved us $200K annually. This technology is the future of sustainable agriculture.', rating: 5 },
-        { name: 'Aisha Patel', role: 'Director, SmartHarvest Inc.', text: 'Their customer support and drone intelligence exceeded all expectations. Our ROI was achieved within 6 months.', rating: 5 },
+        { name: 'Dr. Maria Santos', role: 'Menaxhere Ferme, GreenField Estates', text: 'Dronët e AeroAgro AI rritën rendimentin tonë me 35% në sezonin e parë. Rekomandimet e IA janë jashtëzakonisht të sakta.', rating: 5 },
+        { name: 'James O\'Brien', role: 'CEO, AgriTech Farms', text: 'Spërkatja precize na kurseu 200,000$ në vit. Kjo teknologji është e ardhmja e bujqësisë së qëndrueshme.', rating: 5 },
+        { name: 'Aisha Patel', role: 'Drejtoreshë, SmartHarvest Inc.', text: 'Mbështetja dhe inteligjenca e tyre e dronëve i tejkaluan të gjitha pritjet. Rikthimi i investimit tonë u arrit brenda 6 muajsh.', rating: 5 },
     ];
 
     const stats = [
-        { value: '2M+', label: 'Acres Monitored' },
-        { value: '500+', label: 'Farms Powered' },
-        { value: '35%', label: 'Avg Yield Increase' },
-        { value: '60%', label: 'Less Pesticide Use' },
+        { value: '2M+', label: 'Akra të Monitoruara' },
+        { value: '500+', label: 'Ferma të Fuqizuara' },
+        { value: '35%', label: 'Rritje Mesatare e Rendimentit' },
+        { value: '60%', label: 'Më Pak Përdorim Pesticidesh' },
     ];
 
     return (
         <div className="home-page">
-            {/* Hero */}
+            {/* Hero - Full screen video with title and CTA only */}
             <section className="hero">
-                <div className="hero-bg-glow" />
-                <div className="hero-grid-overlay" />
+                <div className="hero-video-wrapper">
+                    <video autoPlay loop muted playsInline className="hero-video">
+                        <source src="https://www-cdn.djiits.com/reactor/assets/_next/static/videos/ec42c957-dd34-483b-8545-802d3f6a5160.mp4" type="video/mp4" />
+                        <source src="https://www-cdn.djiits.com/assets/uploads/8e4bb7660b454b7176025523cebdcd80.mp4" type="video/mp4" />
+                    </video>
+                    <div className="hero-video-overlay" />
+                </div>
+
                 <div className="container hero-content">
                     <motion.div className="hero-text" initial="hidden" animate="visible" variants={stagger}>
-                        <motion.span className="hero-badge" variants={fadeUp} custom={0}>
-                            <Sprout size={16} /> AI-Powered Agriculture
-                        </motion.span>
-                        <motion.h1 variants={fadeUp} custom={1}>
-                            Revolutionize Your <span className="gradient-text">Farm</span> with Intelligent Drones
+                        <motion.h1 variants={fadeUp} custom={0}>
+                            Bujqësi Precize me <span className="gradient-text">Dronë Inteligjentë</span>
                         </motion.h1>
-                        <motion.p variants={fadeUp} custom={2}>
-                            AeroAgro AI combines cutting-edge drone technology with artificial intelligence to help farmers monitor crops, detect diseases, and optimize yields like never before.
-                        </motion.p>
-                        <motion.div className="hero-cta" variants={fadeUp} custom={3}>
-                            <Link to="/products" className="btn-primary" id="hero-explore-btn">
-                                Explore Drones <ArrowRight size={20} />
-                            </Link>
-                            <Link to="/contact" className="btn-outline" id="hero-demo-btn">
-                                Book a Demo
+                        <motion.div className="hero-cta" variants={fadeUp} custom={1}>
+                            <Link to="/products" className="btn-primary btn-hero-main" id="hero-explore-btn">
+                                Eksploro Dronët <ArrowRight size={20} />
                             </Link>
                         </motion.div>
-                        <motion.div className="hero-stats" variants={fadeUp} custom={4}>
-                            {stats.map((s, i) => (
-                                <div key={i} className="stat-item">
-                                    <strong>{s.value}</strong>
-                                    <span>{s.label}</span>
-                                </div>
-                            ))}
-                        </motion.div>
-                    </motion.div>
-                    <motion.div className="hero-visual"
-                        initial={{ opacity: 0, scale: 0.85 }}
-                        animate={{ opacity: 1, scale: 1 }}
-                        transition={{ duration: 1, delay: 0.3, ease: [0.4, 0, 0.2, 1] }}
-                    >
-                        <div className="hero-image-wrapper">
-                            <img src={heroImg} alt="AeroAgro AI Drone over farmland" />
-                            <div className="hero-image-glow" />
-                        </div>
                     </motion.div>
                 </div>
             </section>
@@ -98,9 +76,9 @@ const Home = () => {
             <section className="section-padding benefits-section">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-                        <span className="section-tag">Why AeroAgro AI</span>
-                        <h2>Transform Agriculture with <span className="gradient-text">Smart Technology</span></h2>
-                        <p>Our AI-powered drones deliver precision farming solutions that increase productivity while reducing environmental impact.</p>
+                        <span className="section-tag">Pse AeroAgro AI</span>
+                        <h2>Transformoni Bujqësinë me <span className="gradient-text">Teknologji Inteligjente</span></h2>
+                        <p>Dronët tanë të fuqizuar me IA ofrojnë zgjidhje precize për bujqësinë që rrisin produktivitetin ndërsa reduktojnë ndikimin mjedisor.</p>
                     </motion.div>
                     <motion.div className="benefits-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
                         {benefits.map((b, i) => (
@@ -118,8 +96,8 @@ const Home = () => {
             <section className="section-padding features-section">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-                        <span className="section-tag">Key Features</span>
-                        <h2>Technology That <span className="gradient-text">Empowers</span> Farmers</h2>
+                        <span className="section-tag">Karakteristikat Kryesore</span>
+                        <h2>Teknologji që <span className="gradient-text">Fuqizon</span> Fermerët</h2>
                     </motion.div>
                     <motion.div className="features-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
                         {features.map((f, i) => (
@@ -128,7 +106,7 @@ const Home = () => {
                                 <h3>{f.title}</h3>
                                 <p>{f.desc}</p>
                                 <Link to="/how-it-works" className="feature-link">
-                                    Learn more <ChevronRight size={16} />
+                                    Mëso më shumë <ChevronRight size={16} />
                                 </Link>
                             </motion.div>
                         ))}
@@ -138,26 +116,24 @@ const Home = () => {
 
             {/* Product Highlights */}
             <section className="section-padding product-highlights">
+            </section>
+
+            {/* Efficiency Section */}
+            <section className="section-padding efficiency-highlights">
                 <div className="container">
-                    <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-                        <span className="section-tag">Our Drones</span>
-                        <h2>Engineered for <span className="gradient-text">Modern Farming</span></h2>
-                    </motion.div>
-                    <motion.div className="product-preview" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp} custom={1}>
-                        <div className="product-preview-card glass">
-                            <div className="product-preview-info">
-                                <h3>AeroScout X1</h3>
-                                <p>Our flagship crop monitoring drone with advanced AI vision. Perfect for farms up to 500 acres.</p>
-                                <ul>
-                                    <li>✓ 45-min flight time</li>
-                                    <li>✓ Real-time disease detection</li>
-                                    <li>✓ Autonomous flight planning</li>
-                                    <li>✓ Multi-spectral imaging</li>
-                                </ul>
-                                <Link to="/products" className="btn-primary">
-                                    View All Products <ArrowRight size={18} />
-                                </Link>
+                    <motion.div className="efficiency-grid glass" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
+                        <div className="efficiency-text">
+                            <span className="section-tag">Optimizimi</span>
+                            <h2>Llogarisni <span className="gradient-text">Përfitimet tuaja të Efikasitetit</span></h2>
+                            <p>Zbuloni se sa mund të kurseni për kimikate, ujë dhe fuqi punëtore duke përdorur mjetet tona të menaxhimit të flotës të drejtuara nga IA.</p>
+                            <div className="efficiency-stats">
+                                <div className="e-stat"><strong>60%</strong> <span>Më Pak Mbetje Kimike</span></div>
+                                <div className="e-stat"><strong>40%</strong> <span>Optimizim i Ujit</span></div>
                             </div>
+                            <Link to="/contact" className="btn-primary">Na Kontaktoni për Efikasitetin <ArrowRight size={20} /></Link>
+                        </div>
+                        <div className="efficiency-visual">
+                            <Calculator size={120} strokeWidth={1} />
                         </div>
                     </motion.div>
                 </div>
@@ -167,8 +143,8 @@ const Home = () => {
             <section className="section-padding testimonials-section">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-                        <span className="section-tag">Success Stories</span>
-                        <h2>Trusted by <span className="gradient-text">Farmers Worldwide</span></h2>
+                        <span className="section-tag">Histori Suksesi</span>
+                        <h2>Besohet nga <span className="gradient-text">Fermerët në Mbarë Botën</span></h2>
                     </motion.div>
                     <motion.div className="testimonials-grid" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.2 }} variants={stagger}>
                         {testimonials.map((t, i) => (
@@ -194,11 +170,11 @@ const Home = () => {
             <section className="cta-section">
                 <div className="container">
                     <motion.div className="cta-card" initial="hidden" whileInView="visible" viewport={{ once: true, amount: 0.3 }} variants={fadeUp}>
-                        <h2>Ready to Elevate Your Farming?</h2>
-                        <p>Book a free demo and see how AeroAgro AI can transform your agricultural operations.</p>
+                        <h2>Gati Për Të Ngritur Fermën Tuaj?</h2>
+                        <p>Rezervoni një demo falas dhe shihni si AeroAgro AI mund të transformojë operacionet tuaja bujqësore.</p>
                         <div className="cta-buttons">
-                            <Link to="/contact" className="btn-primary" id="cta-demo-btn">Book a Demo <ArrowRight size={20} /></Link>
-                            <Link to="/pricing" className="btn-outline" id="cta-pricing-btn">See Pricing</Link>
+                            <Link to="/contact" className="btn-primary" id="cta-demo-btn">Rezervo një Demo <ArrowRight size={20} /></Link>
+                            <Link to="/contact" className="btn-outline" id="cta-pricing-btn">Na Kontaktoni</Link>
                         </div>
                     </motion.div>
                 </div>

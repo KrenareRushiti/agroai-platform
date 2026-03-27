@@ -13,7 +13,7 @@ const Footer = () => {
                         <span>AeroAgro AI</span>
                     </Link>
                     <p className="footer-desc">
-                        Empowering modern agriculture with AI-powered drone technology. Precision farming for a sustainable future.
+                        Fuqizimi i bujqësisë moderne me teknologjinë e dronëve me IA. Bujqësi precize për një të ardhme të qëndrueshme.
                     </p>
                     <div className="social-links">
                         <a href="#"><Facebook size={20} /></a>
@@ -24,32 +24,33 @@ const Footer = () => {
                 </div>
 
                 <div className="footer-links">
-                    <h3>Quick Links</h3>
+                    <h3>Lidhje të Shpejta</h3>
                     <ul>
-                        <li><Link to="/products">Drones</Link></li>
-                        <li><Link to="/how-it-works">How It Works</Link></li>
-                        <li><Link to="/about">About Us</Link></li>
-                        <li><Link to="/pricing">Pricing</Link></li>
-                        <li><Link to="/blog">Blog</Link></li>
+                        <li><Link to="/products">Dronët</Link></li>
+                        <li><Link to="/how-it-works">Si Funksionon</Link></li>
+                        <li><Link to="/about">Rreth Nesh</Link></li>
+                        <li><Link to="/dashboard">Paneli i Fermerit</Link></li>
+                        <li><Link to="/blog">Blogu</Link></li>
+                        <li><Link to="/contact">Kontakti</Link></li>
                     </ul>
                 </div>
 
                 <div className="footer-services">
-                    <h3>Services</h3>
+                    <h3>Shërbimet</h3>
                     <ul>
-                        <li><a href="#">Crop Monitoring</a></li>
-                        <li><a href="#">Precision Spraying</a></li>
-                        <li><a href="#">Field Mapping</a></li>
-                        <li><a href="#">Irrigation Check</a></li>
-                        <li><a href="#">Yield Prediction</a></li>
+                        <li><a href="#">Monitorimi i të Mbjellave</a></li>
+                        <li><a href="#">Spërkatje me Precizion</a></li>
+                        <li><a href="#">Hartëzimi i Fushës</a></li>
+                        <li><a href="#">Kontrolli i Ujitjes</a></li>
+                        <li><a href="#">Parashikimi i Prodhimit</a></li>
                     </ul>
                 </div>
 
                 <div className="footer-newsletter">
-                    <h3>Newsletter</h3>
-                    <p>Get the latest updates in smart farming.</p>
+                    <h3>Buletini Informues</h3>
+                    <p>Merrni përditësimet më të fundit në bujqësinë inteligjente.</p>
                     <form className="newsletter-form">
-                        <input type="email" placeholder="Your email address" required />
+                        <input type="email" placeholder="Adresa juaj e emailit" required />
                         <button type="submit">
                             <ArrowRight size={20} />
                         </button>
@@ -57,21 +58,25 @@ const Footer = () => {
                     <div className="contact-info">
                         <div className="info-item">
                             <Phone size={16} />
-                            <span>+1 (555) 123-4567</span>
+                            <span>+383 44 123 456</span>
                         </div>
                         <div className="info-item">
                             <Mail size={16} />
-                            <span>contact@aeroagro.ai</span>
+                            <span>Aero Agro@gmail.com</span>
+                        </div>
+                        <div className="info-item">
+                            <MapPin size={16} />
+                            <span>Prishtinë, Kosovë</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div className="footer-bottom">
                 <div className="container">
-                    <p>&copy; 2026 AeroAgro AI. All rights reserved.</p>
+                    <p>&copy; 2026 AeroAgro AI. Të gjitha të drejtat e rezervuara.</p>
                     <div className="bottom-links">
-                        <a href="#">Privacy Policy</a>
-                        <a href="#">Terms of Service</a>
+                        <a href="#">Politikat e Privatësisë</a>
+                        <a href="#">Kushtet e Shërbimit</a>
                     </div>
                 </div>
             </div>

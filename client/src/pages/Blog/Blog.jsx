@@ -12,45 +12,45 @@ const stagger = { visible: { transition: { staggerChildren: 0.1 } } };
 
 const articles = [
     {
-        id: 1, category: 'Smart Farming',
-        title: 'How AI is Transforming Modern Agriculture',
-        excerpt: 'Discover how artificial intelligence and machine learning are revolutionizing farming practices, from soil analysis to yield prediction.',
-        author: 'Dr. Maria Santos', date: 'March 5, 2026', readTime: '8 min read',
+        id: 1, category: 'Bujqësi Inteligjente',
+        title: 'Si IA po Transformon Bujqësinë Moderne',
+        excerpt: 'Zbuloni se si inteligjenca artificiale dhe mësimi makinerik po revolucionarizojnë praktikat bujqësore, nga analiza e tokës deri te parashikimi i rendimentit.',
+        author: 'Dr. Maria Santos', date: '5 Mars, 2026', readTime: 'Lexim 8 min',
         color: '#2ECC71',
     },
     {
-        id: 2, category: 'Drone Technology',
-        title: 'The Evolution of Agricultural Drones: 2020–2026',
-        excerpt: 'A comprehensive look at how drone technology has evolved over the past six years and what the future holds for aerial farming.',
-        author: 'James O\'Brien', date: 'Feb 28, 2026', readTime: '6 min read',
+        id: 2, category: 'Teknologjia e Dronëve',
+        title: 'Evolucioni i Dronëve Bujqësorë: 2020–2026',
+        excerpt: 'Një vështrim gjithëpërfshirës se si ka evoluar teknologjia e dronëve gjatë gjashtë viteve të fundit dhe çfarë mban e ardhmja për bujqësinë ajrore.',
+        author: 'James O\'Brien', date: '28 Shk, 2026', readTime: 'Lexim 6 min',
         color: '#2E86C1',
     },
     {
-        id: 3, category: 'Crop Optimization',
-        title: 'Precision Spraying: Reducing Costs by 60%',
-        excerpt: 'Learn how AI-guided precision spraying can dramatically cut chemical usage while improving crop protection effectiveness.',
-        author: 'Aisha Patel', date: 'Feb 20, 2026', readTime: '5 min read',
+        id: 3, category: 'Optimizimi i të Mbjellave',
+        title: 'Spërkatje me Precizion: Ulja e Kostove me 60%',
+        excerpt: 'Mësoni si spërkatja me precizion e udhëhequr nga IA mund të ulë ndjeshëm përdorimin e kimikateve duke përmirësuar efektivitetin e mbrojtjes së të mbjellave.',
+        author: 'Aisha Patel', date: '20 Shk, 2026', readTime: 'Lexim 5 min',
         color: '#D4AC0D',
     },
     {
-        id: 4, category: 'Agricultural AI',
-        title: 'Computer Vision for Early Disease Detection',
-        excerpt: 'How multispectral imaging combined with deep learning models can detect plant diseases days before they become visible.',
-        author: 'Dr. Chen Wei', date: 'Feb 15, 2026', readTime: '10 min read',
+        id: 4, category: 'IA Bujqësore',
+        title: 'Vizioni Kompjuterik për Zbulimin e Hershëm të Sëmundjeve',
+        excerpt: 'Si imazhet multispektrale të kombinuara me modelet e mësimit të thellë mund të zbulojnë sëmundjet e bimëve ditë para se të bëhen të dukshme.',
+        author: 'Dr. Chen Wei', date: '15 Shk, 2026', readTime: 'Lexim 10 min',
         color: '#2ECC71',
     },
     {
-        id: 5, category: 'Smart Farming',
-        title: 'The Economics of Drone-Powered Farming',
-        excerpt: 'An ROI analysis of adopting AI drone technology for farms of different sizes, from family operations to commercial enterprises.',
-        author: 'Sarah Johnson', date: 'Feb 8, 2026', readTime: '7 min read',
+        id: 5, category: 'Bujqësi Inteligjente',
+        title: 'Ekonomia e Bujqësisë së Fuqizuar nga Dronët',
+        excerpt: 'Një analizë e ROI (Kthimi nga Investimi) e adoptimit të teknologjisë së dronëve me IA për ferma të madhësive të ndryshme, nga operacionet familjare te ndërmarrjet komerciale.',
+        author: 'Sarah Johnson', date: '8 Shk, 2026', readTime: 'Lexim 7 min',
         color: '#2E86C1',
     },
     {
-        id: 6, category: 'Crop Optimization',
-        title: 'NDVI Mapping: A Farmer\'s Guide to Crop Health',
-        excerpt: 'Understanding Normalized Difference Vegetation Index data and how it helps you make smarter irrigation and fertilization decisions.',
-        author: 'Dr. Maria Santos', date: 'Jan 30, 2026', readTime: '9 min read',
+        id: 6, category: 'Optimizimi i të Mbjellave',
+        title: 'Hartëzimi NDVI: Udhëzues për Fermerët Mbi Shëndetin e të Mbjellave',
+        excerpt: 'Kuptimi i të dhënave të Indeksit të Diferencës së Normalizuar të Vegjetacionit dhe si ju ndihmon të merrni vendime më të zgjuara për ujitjen dhe plehërimin.',
+        author: 'Dr. Maria Santos', date: '30 Jan, 2026', readTime: 'Lexim 9 min',
         color: '#D4AC0D',
     },
 ];
@@ -61,9 +61,9 @@ const Blog = () => {
             <section className="blog-hero">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
-                        <span className="section-tag">Blog & Resources</span>
-                        <h1>Insights on <span className="gradient-text">Smart Agriculture</span></h1>
-                        <p>Expert articles on AI, drones, and the future of precision farming.</p>
+                        <span className="section-tag">Blogu & Burimet</span>
+                        <h1>Njohuri mbi <span className="gradient-text">Bujqësinë Inteligjente</span></h1>
+                        <p>Artikuj nga ekspertë mbi IA, dronë, dhe të ardhmen e bujqësisë me precizion.</p>
                     </motion.div>
                 </div>
             </section>
@@ -85,9 +85,9 @@ const Blog = () => {
                                         <div className="meta-author"><User size={14} />{article.author}</div>
                                         <div className="meta-date"><Clock size={14} />{article.readTime}</div>
                                     </div>
-                                    <button className="blog-read-more">
-                                        Read Article <ArrowRight size={16} />
-                                    </button>
+                                    <Link to={`/blog/${article.id}`} className="blog-read-more">
+                                        Lexo Artikullin <ArrowRight size={16} />
+                                    </Link>
                                 </div>
                             </motion.article>
                         ))}

@@ -10,11 +10,33 @@ const fadeUp = {
 
 const AdminDashboard = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [loginData, setLoginData] = useState({ email: '', password: '' });
+    const [loginData, setLoginData] = useState({ email: 'admin@aeroagro.ai', password: 'admin' });
     const [activeTab, setActiveTab] = useState('overview');
-    const [editingDrone, setEditingDrone] = useState(null);
 
-    // Mock data
+    // Live data from MongoDB
+    const [orders, setOrders] = useState([]);
+    const [inquiries, setInquiries] = useState([]);
+    const [loading, setLoading] = useState(false);
+
+    // Fetch data from backend
+    const fetchData = async () => {
+        setLoading(true);
+        try {
+            const resOrders = await fetch('http://localhost:5000/api/orders');
+            const dataOrders = await resOrders.json();
+            setOrders(dataOrders);
+
+            const resInquiries = await fetch('http://localhost:5000/api/inquiries');
+            const dataInquiries = await resInquiries.json();
+            setInquiries(dataInquiries);
+        } catch (error) {
+            console.error('Error fetching data:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    // Mock data for other sections
     const [drones, setDrones] = useState([
         { id: 1, name: 'AeroScout X1', price: '$4,999', category: 'Monitoring', status: 'Active' },
         { id: 2, name: 'AgroSpray Pro', price: '$12,499', category: 'Spraying', status: 'Active' },
@@ -23,36 +45,29 @@ const AdminDashboard = () => {
     ]);
 
     const [blogPosts, setBlogPosts] = useState([
-        { id: 1, title: 'How AI is Transforming Agriculture', author: 'Dr. Maria Santos', status: 'Published', date: '2026-03-05' },
-        { id: 2, title: 'Evolution of Agricultural Drones', author: 'James O\'Brien', status: 'Published', date: '2026-02-28' },
-        { id: 3, title: 'Precision Spraying Cost Analysis', author: 'Aisha Patel', status: 'Draft', date: '2026-02-20' },
+        { id: 1, title: 'E ardhmja e Bujqësisë me Dronë', author: 'Admin', date: '2026-03-20', status: 'Published' }
     ]);
 
-    const inquiries = [
-        { id: 1, name: 'John Smith', email: 'john@farm.com', subject: 'Demo Request', date: '2026-03-10', status: 'New' },
-        { id: 2, name: 'Sarah Williams', email: 'sarah@agri.co', subject: 'Enterprise Pricing', date: '2026-03-09', status: 'Replied' },
-        { id: 3, name: 'Mike Chen', email: 'mike@greenfield.com', subject: 'Technical Support', date: '2026-03-08', status: 'New' },
-    ];
-
     const stats = [
-        { icon: <Eye size={22} />, value: '12,458', label: 'Page Views', change: '+14%', color: '#2ECC71' },
-        { icon: <Users size={22} />, value: '2,341', label: 'Visitors', change: '+8%', color: '#2E86C1' },
-        { icon: <MessageSquare size={22} />, value: '156', label: 'Inquiries', change: '+23%', color: '#D4AC0D' },
-        { icon: <DollarSign size={22} />, value: '$89,200', label: 'Revenue', change: '+18%', color: '#27AE60' },
+        { icon: <DollarSign size={22} />, value: orders.length, label: 'Total Orders', change: '+100%', color: '#2ECC71' },
+        { icon: <MessageSquare size={22} />, value: inquiries.length, label: 'Inquiries', change: '+100%', color: '#2E86C1' },
+        { icon: <TrendingUp size={22} />, value: orders.filter(o => o.orderType === 'buy').length, label: 'Sales', change: '+15%', color: '#D4AC0D' },
+        { icon: <Globe size={22} />, value: orders.filter(o => o.orderType === 'rent').length, label: 'Rentals', change: '+5%', color: '#27AE60' },
     ];
 
     const sidebarItems = [
         { id: 'overview', icon: <BarChart3 size={20} />, label: 'Overview' },
-        { id: 'products', icon: <Package size={20} />, label: 'Products' },
-        { id: 'blog', icon: <FileText size={20} />, label: 'Blog Posts' },
+        { id: 'orders', icon: <DollarSign size={20} />, label: 'Orders (Sales/Rent)' },
         { id: 'inquiries', icon: <MessageSquare size={20} />, label: 'Inquiries' },
-        { id: 'knowledge', icon: <Database size={20} />, label: 'AI Knowledge Base' },
+        { id: 'products', icon: <Package size={20} />, label: 'Products' },
+        { id: 'knowledge', icon: <Database size={20} />, label: 'AI Knowledge' },
     ];
 
     const handleLogin = (e) => {
         e.preventDefault();
         if (loginData.email && loginData.password) {
             setIsLoggedIn(true);
+            fetchData();
         }
     };
 
@@ -224,22 +239,69 @@ const AdminDashboard = () => {
                 {/* Inquiries Tab */}
                 {activeTab === 'inquiries' && (
                     <motion.div initial="hidden" animate="visible" variants={fadeUp}>
-                        <h1>Customer Inquiries</h1>
+                        <h1>Kërkesat e Klientëve</h1>
                         <div className="admin-table glass">
                             <table>
                                 <thead>
-                                    <tr><th>Name</th><th>Email</th><th>Subject</th><th>Date</th><th>Status</th></tr>
+                                    <tr><th>Emri</th><th>Email</th><th>Subjekti</th><th>Data</th><th>Statusi</th></tr>
                                 </thead>
                                 <tbody>
-                                    {inquiries.map(inq => (
-                                        <tr key={inq.id}>
+                                    {inquiries.length > 0 ? inquiries.map(inq => (
+                                        <tr key={inq._id}>
                                             <td><strong>{inq.name}</strong></td>
                                             <td>{inq.email}</td>
-                                            <td>{inq.subject}</td>
-                                            <td>{inq.date}</td>
+                                            <td>{inq.subject || 'Pa subjekt'}</td>
+                                            <td>{new Date(inq.createdAt).toLocaleDateString()}</td>
                                             <td><span className={`status-badge ${inq.status.toLowerCase()}`}>{inq.status}</span></td>
                                         </tr>
-                                    ))}
+                                    )) : <tr><td colSpan="5" style={{ textAlign: 'center', padding: '40px' }}>Nuk ka kërkesa akoma.</td></tr>}
+                                </tbody>
+                            </table>
+                        </div>
+                    </motion.div>
+                )}
+
+                {/* Orders Tab (Sales & Rentals) */}
+                {activeTab === 'orders' && (
+                    <motion.div initial="hidden" animate="visible" variants={fadeUp}>
+                        <h1>Porositë (Blerje & Qira)</h1>
+                        <div className="admin-table glass">
+                            <table>
+                                <thead>
+                                    <tr><th>Droni</th><th>Klienti</th><th>Lloji</th><th>Detajet</th><th>Statusi</th></tr>
+                                </thead>
+                                <tbody>
+                                    {orders.length > 0 ? orders.map(order => (
+                                        <tr key={order._id}>
+                                            <td><strong>{order.droneName}</strong></td>
+                                            <td>
+                                                <div>{order.customerName}</div>
+                                                <small style={{ opacity: 0.6 }}>{order.customerEmail} • {order.customerPhone}</small>
+                                                {order.company && <div style={{ fontSize: '0.8rem', color: 'var(--primary)', marginTop: '4px' }}>🏢 {order.company}</div>}
+                                            </td>
+                                            <td>
+                                                <span className={`status-badge ${order.orderType === 'buy' ? 'active' : 'pending'}`}>
+                                                    {order.orderType === 'buy' ? 'Blerje' : 'Qira'}
+                                                </span>
+                                            </td>
+                                            <td>
+                                                {order.orderType === 'rent' ? (
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                        <small>📅 {order.duration} / Fillimi: {new Date(order.startDate).toLocaleDateString()}</small>
+                                                        <small>📍 {order.address}</small>
+                                                        <small>🎯 {order.purpose}</small>
+                                                        <small style={{ color: '#e74c3c' }}>🪪 ID: {order.idNumber}</small>
+                                                    </div>
+                                                ) : (
+                                                    <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
+                                                        <small>📍 {order.address}</small>
+                                                        <span>Postim Standard</span>
+                                                    </div>
+                                                )}
+                                            </td>
+                                            <td><span className={`status-badge ${order.status.toLowerCase()}`}>{order.status}</span></td>
+                                        </tr>
+                                    )) : <tr><td colSpan="5" style={{ textAlign: 'center', padding: '40px' }}>Nuk ka porosi akoma.</td></tr>}
                                 </tbody>
                             </table>
                         </div>

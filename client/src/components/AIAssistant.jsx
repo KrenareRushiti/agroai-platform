@@ -3,44 +3,44 @@ import { MessageSquare, X, Send, Brain, User, ChevronDown } from 'lucide-react';
 import './AIAssistant.css';
 
 const knowledgeBase = {
-    greeting: "Hello! 👋 I'm AeroBot, your AI farming assistant. I can help you:\n\n• Learn about our AI-powered drones\n• Get drone recommendations for your farm\n• Explain pricing and plans\n• Guide you through features\n• Help you book a demo\n\nHow can I help you today?",
+    greeting: "Përshëndetje! 👋 Unë jam AeroBot, arkitekti juaj i fermës me IA. Unë mund t'ju ndihmoj të optimizoni fermën tuaj me teknologjinë e dronëve.\n\nMë pyesni për:\n• Rekomandime për dronë bazuar në madhësinë e fermës suaj\n• Jetëgjatësia e baterisë dhe specifikat e mbulimit\n• Strategji për spërkatje me precizion\n• Hartëzimi dhe analiza e ujitjes\n\nSa hektarë po menaxhoni sot?",
 
     responses: {
-        drone: "We offer 4 AI-powered drones:\n\n🛩 **AeroScout X1** ($4,999) - Crop monitoring, 45min flight, 500 acres\n🛩 **AgroSpray Pro** ($12,499) - Precision spraying, 300 acres/hr\n🛩 **TerraScan Elite** ($8,999) - Field mapping, 1000 acres\n🛩 **HarvestGuard Max** ($24,999) - Enterprise fleet, 5000 acres\n\nWhich one would you like to learn more about?",
+        drone: "Flota jonë përfshin:\n\n🛩 **AeroScout X1**: Monitorimi i të mbjellave ($4,999). Më i miri për zbulimin e sëmundjeve dhe problemeve të bimëve.\n🛩 **AgroSpray Pro**: Spërkatje me precizion ($12,499). Ul përdorimin e kimikateve me 60%.\n🛩 **TerraScan Elite**: Hartëzim & Ujitje ($8,999). Topografi me rezolucion të lartë dhe harta për mungesën e ujit.\n🛩 **HarvestGuard Max**: Flotë për ndërmarrje ($24,999). Koordinon deri në 5 dronë për operacione të mëdha.",
 
-        recommend: "I'd love to recommend the right drone! Could you tell me:\n\n1. How large is your farm (in acres)?\n2. What's your main need? (monitoring, spraying, mapping, or all-in-one)\n\nBased on that, I'll find the perfect match! 🎯",
+        hectares: (h) => {
+            if (h < 20) return `Për ${h} hektarë, **AeroScout X1** është i përsosur. Ai mund të mbulojë deri në 500 akra (afërsisht 200 ha) në një mision të vetëm. Do t'ju nevojiten vetëm 1-2 bateri për një ditë të plotë monitorimi.`;
+            if (h < 100) return `Për ${h} hektarë, unë rekomandoj **AgroSpray Pro** për trajtim ose **TerraScan Elite** për hartëzim. Me gjasë do t'ju nevojiten 3-4 bateri dhe 2-3 fluturime për të mbuluar zonën plotësisht.`;
+            return `Për një operacion të madh prej ${h} hektarësh, duhet të merrni në konsideratë flotën e ndërmarrjes **HarvestGuard Max**. Ai lejon koordinimin e shumë dronëve për të mbuluar zona të mëdha në një fraksion kohe.`;
+        },
 
-        small_farm: "For a small farm (under 100 acres), I recommend the **AeroScout X1** ($4,999 or $299/mo Starter Plan). It offers:\n\n✅ 45-minute flight time\n✅ Real-time crop health monitoring\n✅ AI disease detection\n✅ Mobile app control\n\nWant to book a demo? Just visit our Contact page!",
+        battery: "Bateritë e dronëve zakonisht zgjasin 35–60 minuta në varësi të modelit dhe ngarkesës. \n\n• **X1**: 45 min\n• **AgroSpray**: 35 min (më i rëndë për shkak të rezervuarit)\n• **TerraScan**: 55 min\n• **HarvestGuard**: 60 min.\n\nNe rekomandojmë një rrotullim 'Tre-Bateri' (një në fluturim, një duke u karikuar, një gati) për operacion të vazhdueshëm.",
 
-        medium_farm: "For a medium farm (100-500 acres), I recommend the **Professional Plan** ($799/mo) with:\n\n✅ AeroScout X1 + AgroSpray Pro combo\n✅ Full AI analytics suite\n✅ Precision spraying (60% less chemicals)\n✅ Multi-spectral imaging\n\nThis gives you monitoring AND spraying capabilities!",
+        spraying: "Sistemi ynë inteligjent i spërkatjes përdor **Aplikim me Normë të Ndryshueshme (VRA)**. Analizon shëndetin e të mbjellave në kohë reale dhe spërkat vetëm aty ku zbulohet ndonjë problem ose dëmtues. Kjo mund të kursejë deri në 60% të pesticideve dhe 40% në pleh.",
 
-        large_farm: "For a large farm (500+ acres), I recommend the **Enterprise Plan** ($1,999/mo) with the **HarvestGuard Max**:\n\n✅ Up to 5 coordinated drones\n✅ Unlimited coverage\n✅ Fleet AI coordination\n✅ Dedicated account manager\n✅ 24/7 premium support\n\nWould you like to schedule a personalized demo?",
+        mapping: "Hartëzimi ju ndihmon të vizualizoni mungesën e ujit, shëndetin e tokës (NDVI) dhe ndryshimet topografike. **TerraScan Elite** yni prodhon harta me rezolucion 2cm/pixel, të përsosura për planifikimin e ujitjes me precizion.",
 
-        pricing: "Our pricing plans:\n\n💰 **Starter** - $299/mo\nBasic drone, 100 acres, limited AI\n\n💰 **Professional** - $799/mo (Most Popular)\nAdvanced drones, 500 acres, full AI\n\n💰 **Enterprise** - $1,999/mo\nFull fleet, unlimited, dedicated support\n\nAll plans include a 14-day free trial! Visit /pricing for full details.",
-
-        agriculture: "AI drones help agriculture in many ways:\n\n🌱 **Crop Monitoring** - Detect diseases before they're visible\n💧 **Irrigation** - Find water stress with thermal imaging\n🎯 **Precision Spraying** - Apply chemicals only where needed\n🗺️ **Field Mapping** - High-res maps for planning\n📊 **Yield Prediction** - AI estimates your harvest\n\nAll powered by real-time AI analysis!",
-
-        demo: "Great choice! You can book a demo in two ways:\n\n1. Visit our **Contact page** → click 'Book a Demo' tab\n2. Call us at **+1 (555) 123-4567**\n\nOur team will schedule a live flight demo at your farm or a virtual walkthrough. Demos are completely free! 🎉",
-
-        how: "Here's how our system works:\n\n1️⃣ **Plan** - Set flight area via mobile app\n2️⃣ **Fly** - Drone navigates autonomously\n3️⃣ **Capture** - Sensors collect field data\n4️⃣ **Analyze** - AI processes images & data\n5️⃣ **Report** - Dashboard shows insights\n\nThe whole process takes about 30 minutes for a 100-acre field!",
-
-        default: "I'm not sure I understood that completely. I can help with:\n\n• **Drones** - Our products and specs\n• **Recommendations** - Best drone for your farm\n• **Pricing** - Plans and costs\n• **How it works** - Our technology explained\n• **Demo** - Schedule a live demonstration\n\nWhat would you like to know? 🤔"
+        default: "Unë mund t'ju ndihmoj me specifikat e dronëve, llogaritjet e efikasitetit dhe strategjitë bujqësore. \n\nProvo të pyesësh: 'Cili dron për 50 hektarë?' ose 'Sa zgjat bateria?'"
     }
 };
 
 const getResponse = (input) => {
     const lower = input.toLowerCase();
 
-    if (lower.match(/drone|product|model|fleet/)) return knowledgeBase.responses.drone;
-    if (lower.match(/recommend|suggest|best|which|right for/)) return knowledgeBase.responses.recommend;
-    if (lower.match(/small|under 100|family|little farm/)) return knowledgeBase.responses.small_farm;
-    if (lower.match(/medium|100.*(500|acre)|mid.?size/)) return knowledgeBase.responses.medium_farm;
-    if (lower.match(/large|enterprise|big|500\+|1000|5000|commercial/)) return knowledgeBase.responses.large_farm;
-    if (lower.match(/price|pricing|cost|plan|subscription/)) return knowledgeBase.responses.pricing;
-    if (lower.match(/agriculture|farm|crop|help|benefit|why/)) return knowledgeBase.responses.agriculture;
-    if (lower.match(/demo|book|schedule|try|test/)) return knowledgeBase.responses.demo;
-    if (lower.match(/how|work|process|step/)) return knowledgeBase.responses.how;
-    if (lower.match(/hi|hello|hey|good/)) return knowledgeBase.greeting;
+    // Check for number + hectare/acre
+    const areaMatch = lower.match(/(\d+)\s*(hectar|hectare|ha|acre|ac)/);
+    if (areaMatch) {
+        const value = parseInt(areaMatch[1]);
+        const hectares = areaMatch[2].startsWith('ac') ? value * 0.404 : value;
+        return knowledgeBase.responses.hectares(hectares);
+    }
+
+    if (lower.match(/dron|drone|product|model|fleet/)) return knowledgeBase.responses.drone;
+    if (lower.match(/bateri|battery|last|flight time|how long/)) return knowledgeBase.responses.battery;
+    if (lower.match(/spërkatje|spray|pesticid|pesticide|pleh/)) return knowledgeBase.responses.spraying;
+    if (lower.match(/hart|harta|map|survey|topograph|ndvi/)) return knowledgeBase.responses.mapping;
+    if (lower.match(/rekomando|rekomandim|suggest|best|which|cili/)) return "Unë mund t'ju rekomandoj një dron! Të lutem më trego madhësinë e fermës tënde (p.sh. 'Cili dron për 20 hektarë?')";
+    if (lower.match(/përshëndetje|tung|hi|hello|hey|good/)) return knowledgeBase.greeting;
 
     return knowledgeBase.responses.default;
 };
@@ -62,7 +62,7 @@ const AIAssistant = () => {
         scrollToBottom();
     }, [messages]);
 
-    const handleSend = () => {
+    const handleSend = async () => {
         if (!input.trim()) return;
 
         const userMessage = { role: 'user', content: input.trim(), timestamp: new Date() };
@@ -70,12 +70,29 @@ const AIAssistant = () => {
         setInput('');
         setIsTyping(true);
 
-        // Simulate typing delay
-        setTimeout(() => {
-            const response = getResponse(userMessage.content);
-            setMessages(prev => [...prev, { role: 'assistant', content: response, timestamp: new Date() }]);
+        try {
+            const response = await fetch('http://localhost:5000/api/chat', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ message: userMessage.content })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                setMessages(prev => [...prev, { role: 'assistant', content: data.response, timestamp: new Date() }]);
+            } else {
+                throw new Error('Backend unavailable');
+            }
+        } catch (error) {
+            console.log('Using local knowledge base fallback');
+            // Fallback to local logic
+            setTimeout(() => {
+                const response = getResponse(userMessage.content);
+                setMessages(prev => [...prev, { role: 'assistant', content: response, timestamp: new Date() }]);
+            }, 800 + Math.random() * 700);
+        } finally {
             setIsTyping(false);
-        }, 800 + Math.random() * 700);
+        }
     };
 
     const handleKeyDown = (e) => {
@@ -86,10 +103,10 @@ const AIAssistant = () => {
     };
 
     const quickActions = [
-        { label: '🛩️ View Drones', query: 'Show me your drones' },
-        { label: '💰 Pricing', query: 'What are your pricing plans?' },
-        { label: '🎯 Recommend', query: 'Recommend a drone for my farm' },
-        { label: '📅 Demo', query: 'How do I book a demo?' },
+        { label: '🛩️ Shiko Dronët', query: 'Më trego dronët e tu' },
+        { label: '💰 Çmimet', query: 'Cilat janë planet e çmimeve?' },
+        { label: '🎯 Rekomando', query: 'Rekomando një dron për fermën time' },
+        { label: '📅 Demo', query: 'Si mund të rezervoj një demo?' },
     ];
 
     return (
@@ -106,7 +123,7 @@ const AIAssistant = () => {
                     <div className="chat-header-info">
                         <div className="chat-avatar"><Brain size={22} /></div>
                         <div>
-                            <h4>AeroBot AI</h4>
+                            <h4>AeroBot IA</h4>
                             <span className="online-status">● Online</span>
                         </div>
                     </div>
@@ -153,7 +170,7 @@ const AIAssistant = () => {
                 <div className="chat-input-area">
                     <input
                         type="text"
-                        placeholder="Ask about drones, pricing, farming..."
+                        placeholder="Pyesni rreth dronëve, çmimeve, fermës..."
                         value={input}
                         onChange={e => setInput(e.target.value)}
                         onKeyDown={handleKeyDown}

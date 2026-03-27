@@ -31,9 +31,9 @@ const Contact = () => {
             <section className="contact-hero">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
-                        <span className="section-tag">Get in Touch</span>
-                        <h1>Let's Start a <span className="gradient-text">Conversation</span></h1>
-                        <p>Have questions about our drones? Want a live demo? We're here to help.</p>
+                        <span className="section-tag">Na Kontaktoni</span>
+                        <h1>Bisedo me <span className="gradient-text">ne</span></h1>
+                        <p>Keni pyetje për dronët tanë? Dëshironi një demo live? Ne jemi këtu për t'ju ndihmuar.</p>
                     </motion.div>
                 </div>
             </section>
@@ -41,35 +41,35 @@ const Contact = () => {
             <section className="section-padding">
                 <div className="container contact-grid">
                     <motion.div className="contact-info" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                        <h2>Contact Information</h2>
-                        <p>Reach out to us for sales inquiries, support, or partnership opportunities.</p>
+                        <h2>Informacioni i Kontaktit</h2>
+                        <p>Na kontaktoni për kërkesa shitjeje, mbështetje, ose mundësi partneriteti.</p>
                         <div className="info-cards">
                             <div className="info-card glass">
                                 <div className="info-icon"><Phone size={22} /></div>
                                 <div>
-                                    <strong>Phone</strong>
+                                    <strong>Telefoni</strong>
                                     <span>+1 (555) 123-4567</span>
                                 </div>
                             </div>
                             <div className="info-card glass">
                                 <div className="info-icon"><Mail size={22} /></div>
                                 <div>
-                                    <strong>Email</strong>
-                                    <span>contact@aeroagro.ai</span>
+                                    <strong>Emaili</strong>
+                                    <span>Aero Agro@gmail.com</span>
                                 </div>
                             </div>
                             <div className="info-card glass">
                                 <div className="info-icon"><MapPin size={22} /></div>
                                 <div>
-                                    <strong>Office</strong>
-                                    <span>123 AgTech Blvd, San Jose, CA 95134</span>
+                                    <strong>Zyra</strong>
+                                    <span>Prishtinë, Kosovë</span>
                                 </div>
                             </div>
                             <div className="info-card glass">
                                 <div className="info-icon"><Clock size={22} /></div>
                                 <div>
-                                    <strong>Hours</strong>
-                                    <span>Mon-Fri: 8AM - 6PM PST</span>
+                                    <strong>Orari</strong>
+                                    <span>Hën-Pre: 8AM - 6PM PST</span>
                                 </div>
                             </div>
                         </div>
@@ -77,8 +77,8 @@ const Contact = () => {
                         {/* Map placeholder */}
                         <div className="map-container glass">
                             <iframe
-                                title="AeroAgro AI Office"
-                                src="https://www.openstreetmap.org/export/embed.html?bbox=-121.95,37.35,-121.85,37.40&layer=mapnik"
+                                title="AeroAgro AI Office Prishtina"
+                                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d46940.16368817751!2d21.12353396911681!3d42.66291380963507!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x13549ee605110927%3A0x9365bfdf385eb95a!2sPristina%2C%20Kosovo!5e0!3m2!1sen!2s!4v1714000000000!5m2!1sen!2s"
                                 width="100%"
                                 height="250"
                                 style={{ border: 0, borderRadius: '12px' }}
@@ -90,16 +90,16 @@ const Contact = () => {
                     <motion.div className="contact-form-area" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
                         <div className="form-tabs">
                             <button className={`tab-btn ${activeTab === 'contact' ? 'active' : ''}`} onClick={() => setActiveTab('contact')}>
-                                <Mail size={18} /> Contact Us
+                                <Mail size={18} /> Na Kontaktoni
                             </button>
                             <button className={`tab-btn ${activeTab === 'demo' ? 'active' : ''}`} onClick={() => setActiveTab('demo')}>
-                                <Calendar size={18} /> Book a Demo
+                                <Calendar size={18} /> Rezervo Demo
                             </button>
                         </div>
 
                         {submitted && (
                             <div className="success-msg">
-                                ✓ Your message has been sent! We'll get back to you within 24 hours.
+                                ✓ Mesazhi juaj u dërgua! Ne do t'ju kthejmë përgjigje brenda 24 orëve.
                             </div>
                         )}
 
@@ -107,80 +107,80 @@ const Contact = () => {
                             <form className="contact-form glass" onSubmit={handleContactSubmit}>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>Full Name *</label>
+                                        <label>Emri i Plotë *</label>
                                         <input type="text" placeholder="John Doe" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Email *</label>
+                                        <label>Emaili *</label>
                                         <input type="email" placeholder="john@example.com" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} />
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>Phone</label>
+                                        <label>Telefoni</label>
                                         <input type="tel" placeholder="+1 (555) 000-0000" value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Farm Size</label>
+                                        <label>Madhësia e Fermës</label>
                                         <select value={formData.farmSize} onChange={e => setFormData({ ...formData, farmSize: e.target.value })}>
-                                            <option value="">Select farm size</option>
-                                            <option value="small">Under 100 acres</option>
-                                            <option value="medium">100 - 500 acres</option>
-                                            <option value="large">500 - 2000 acres</option>
-                                            <option value="enterprise">2000+ acres</option>
+                                            <option value="">Zgjidh madhësinë</option>
+                                            <option value="small">Nën 100 akra</option>
+                                            <option value="medium">100 - 500 akra</option>
+                                            <option value="large">500 - 2000 akra</option>
+                                            <option value="enterprise">2000+ akra</option>
                                         </select>
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label>Subject *</label>
-                                    <input type="text" placeholder="How can we help?" required value={formData.subject} onChange={e => setFormData({ ...formData, subject: e.target.value })} />
+                                    <label>Subjekti *</label>
+                                    <input type="text" placeholder="Si mund t'ju ndihmojmë?" required value={formData.subject} onChange={e => setFormData({ ...formData, subject: e.target.value })} />
                                 </div>
                                 <div className="form-group">
-                                    <label>Message *</label>
-                                    <textarea rows="5" placeholder="Tell us about your needs..." required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}></textarea>
+                                    <label>Mesazhi *</label>
+                                    <textarea rows="5" placeholder="Na tregoni për nevojat tuaja..." required value={formData.message} onChange={e => setFormData({ ...formData, message: e.target.value })}></textarea>
                                 </div>
                                 <button type="submit" className="btn-primary" id="contact-submit-btn">
-                                    <Send size={18} /> Send Message
+                                    <Send size={18} /> Dërgo Mesazhin
                                 </button>
                             </form>
                         ) : (
                             <form className="contact-form glass" onSubmit={handleDemoSubmit}>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>Full Name *</label>
+                                        <label>Emri i Plotë *</label>
                                         <input type="text" placeholder="John Doe" required value={demoData.name} onChange={e => setDemoData({ ...demoData, name: e.target.value })} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Email *</label>
+                                        <label>Emaili *</label>
                                         <input type="email" placeholder="john@example.com" required value={demoData.email} onChange={e => setDemoData({ ...demoData, email: e.target.value })} />
                                     </div>
                                 </div>
                                 <div className="form-row">
                                     <div className="form-group">
-                                        <label>Company</label>
-                                        <input type="text" placeholder="Your company" value={demoData.company} onChange={e => setDemoData({ ...demoData, company: e.target.value })} />
+                                        <label>Kompania</label>
+                                        <input type="text" placeholder="Kompania juaj" value={demoData.company} onChange={e => setDemoData({ ...demoData, company: e.target.value })} />
                                     </div>
                                     <div className="form-group">
-                                        <label>Preferred Date *</label>
+                                        <label>Data e Preferuar *</label>
                                         <input type="date" required value={demoData.date} onChange={e => setDemoData({ ...demoData, date: e.target.value })} />
                                     </div>
                                 </div>
                                 <div className="form-group">
-                                    <label>Farm Size *</label>
+                                    <label>Madhësia e Fermës *</label>
                                     <select required value={demoData.farmSize} onChange={e => setDemoData({ ...demoData, farmSize: e.target.value })}>
-                                        <option value="">Select farm size</option>
-                                        <option value="small">Under 100 acres</option>
-                                        <option value="medium">100 - 500 acres</option>
-                                        <option value="large">500 - 2000 acres</option>
-                                        <option value="enterprise">2000+ acres</option>
+                                        <option value="">Zgjidh madhësinë</option>
+                                        <option value="small">Nën 100 akra</option>
+                                        <option value="medium">100 - 500 akra</option>
+                                        <option value="large">500 - 2000 akra</option>
+                                        <option value="enterprise">2000+ akra</option>
                                     </select>
                                 </div>
                                 <div className="form-group">
-                                    <label>Additional Notes</label>
-                                    <textarea rows="4" placeholder="Any specific topics or drones you'd like to see?" value={demoData.notes} onChange={e => setDemoData({ ...demoData, notes: e.target.value })}></textarea>
+                                    <label>Shënime Shtesë</label>
+                                    <textarea rows="4" placeholder="Keni tema specifike ose dronë që dëshironi të shihni?" value={demoData.notes} onChange={e => setDemoData({ ...demoData, notes: e.target.value })}></textarea>
                                 </div>
                                 <button type="submit" className="btn-primary" id="demo-submit-btn">
-                                    <Calendar size={18} /> Schedule Demo
+                                    <Calendar size={18} /> Rezervo Demo
                                 </button>
                             </form>
                         )}

@@ -1,0 +1,145 @@
+.blog-detail-page {
+    padding-top: 0;
+    min-height: 100vh;
+    background: var(--bg);
+}
+
+.blog-detail-hero {
+    height: 60vh;
+    display: flex;
+    align-items: flex-end;
+    padding-bottom: 60px;
+    background-size: cover !important;
+    background-position: center !important;
+    position: relative;
+    border-bottom: 1px solid var(--glass-border);
+}
+
+.back-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    text-decoration: none;
+    margin-bottom: 24px;
+    transition: transform 0.3s;
+}
+
+.back-link:hover {
+    transform: translateX(-5px);
+}
+
+.detail-category {
+    background: rgba(46, 204, 113, 0.2);
+    color: var(--primary);
+    padding: 6px 16px;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    display: inline-block;
+    margin-bottom: 16px;
+}
+
+.detail-title {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 24px;
+    max-width: 900px;
+    font-weight: 800;
+}
+
+.detail-meta {
+    display: flex;
+    gap: 24px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.95rem;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.content-container {
+    padding-top: 80px;
+    padding-bottom: 120px;
+}
+
+.blog-body {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 60px;
+}
+
+.blog-content {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.05rem;
+    line-height: 1.7;
+}
+
+.blog-content p {
+    margin-bottom: 30px;
+}
+
+.blog-content h2 {
+    color: var(--text);
+    font-size: 1.5rem;
+    margin: 40px 0 15px;
+}
+
+.blog-content blockquote {
+    background: rgba(46, 204, 113, 0.1);
+    border-left: 4px solid var(--primary);
+    padding: 30px;
+    margin: 30px 0;
+    font-style: italic;
+    font-size: 1.15rem;
+    border-radius: 0 16px 16px 0;
+}
+
+.blog-sidebar {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.sidebar-card {
+    padding: 30px;
+    border-radius: 20px;
+    border: 1px solid var(--glass-border);
+}
+
+.sidebar-card h3 {
+    margin-bottom: 20px;
+    font-size: 1.2rem;
+}
+
+.sidebar-btn {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.sidebar-btn:hover {
+    background: var(--glass-bg);
+    border-color: var(--primary);
+}
+
+@media (max-width: 992px) {
+    .blog-body {
+        grid-template-columns: 1fr;
+    }
+
+    .detail-title {
+        font-size: 2.5rem;
+    }
+}

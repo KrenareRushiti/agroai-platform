@@ -1,6 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, AnimatePresence } from 'framer-motion';
 import { ArrowRight, ShoppingCart, Battery, Maximize, Cpu, Wifi, Zap } from 'lucide-react';
 import drone1 from '../../assets/drone1.png';
 import drone2 from '../../assets/drone2.png';
@@ -18,72 +18,126 @@ const stagger = { visible: { transition: { staggerChildren: 0.12 } } };
 
 const drones = [
     {
-        id: 1, name: 'AeroScout X1', tagline: 'Crop Monitoring Excellence',
+        id: 1, name: 'AeroScout X1', tagline: 'Përsosmëri në Monitorimin e të Mbjellave',
         img: drone1,
-        price: '$4,999',
+        price: '€4,999',
         specs: [
-            { icon: <Battery size={18} />, label: 'Battery', value: '45 min' },
-            { icon: <Maximize size={18} />, label: 'Coverage', value: '500 acres' },
-            { icon: <Cpu size={18} />, label: 'AI Engine', value: 'GPT Vision' },
-            { icon: <Wifi size={18} />, label: 'Range', value: '15 km' },
+            { icon: <Battery size={18} />, label: 'Bateria', value: '45 min' },
+            { icon: <Maximize size={18} />, label: 'Mbulimi', value: '500 akra' },
+            { icon: <Cpu size={18} />, label: 'Motori AI', value: 'Vizualizimi i GPT' },
+            { icon: <Wifi size={18} />, label: 'Rrezja', value: '15 km' },
         ],
-        useCases: ['Crop Health Analysis', 'Disease Detection', 'Growth Tracking', 'NDVI Mapping'],
-        aiFeatures: ['Real-time plant stress detection', 'Automatic flight path optimization', 'Multi-spectral image analysis'],
-        description: 'The AeroScout X1 is our flagship crop monitoring drone, equipped with advanced AI computer vision to analyze plant health, detect diseases early, and provide actionable insights for farmers managing up to 500 acres.'
+        useCases: ['Analiza e Shëndetit të të Mbjellave', 'Zbulimi i Sëmundjeve', 'Gjurmimi i Rritjes', 'Hartëzimi NDVI'],
+        aiFeatures: ['Zbulimi i problemeve të bimëve në kohë reale', 'Optimizimi automatik i shtegut të fluturimit', 'Analiza e imazheve multi-spektrale'],
+        description: 'AeroScout X1 është droni ynë kryesor për monitorimin e të mbjellave, i pajisur me inteligjencë artificiale për pamjen kompjuterike për të analizuar shëndetin e bimëve, zbulimin e hershëm të sëmundjeve dhe ofrimin e njohurive të zbatueshme për fermerët që menaxhojnë deri në 500 akra.'
     },
     {
-        id: 2, name: 'AgroSpray Pro', tagline: 'Precision Spraying Redefined',
+        id: 2, name: 'AgroSpray Pro', tagline: 'Redefinimi i Spërkatjes së Saktë',
         img: drone2,
-        price: '$12,499',
+        price: '€12,499',
         specs: [
-            { icon: <Battery size={18} />, label: 'Battery', value: '35 min' },
-            { icon: <Maximize size={18} />, label: 'Coverage', value: '300 acres/hr' },
-            { icon: <Cpu size={18} />, label: 'AI Engine', value: 'Spray AI' },
-            { icon: <Zap size={18} />, label: 'Tank', value: '20L' },
+            { icon: <Battery size={18} />, label: 'Bateria', value: '35 min' },
+            { icon: <Maximize size={18} />, label: 'Mbulimi', value: '300 akra/orë' },
+            { icon: <Cpu size={18} />, label: 'Motori AI', value: 'Spërkatje me Inteligjencë Artificiale(AI)' },
+            { icon: <Zap size={18} />, label: 'Rezervuari', value: '20L' },
         ],
-        useCases: ['Precision Pesticide Spraying', 'Fertilizer Distribution', 'Weed Control', 'Seed Planting'],
-        aiFeatures: ['AI-guided nozzle control', 'Variable rate application', 'Wind compensation algorithm'],
-        description: 'The AgroSpray Pro uses AI-controlled spraying systems to deliver pesticides and fertilizers exactly where needed. Reduce chemical use by 60% while maintaining maximum crop protection.'
+        useCases: ['Spërkatja me precizion e pesticideve', 'Shpërndarja e Plehrash', 'Kontrolli i Shpërthimeve', 'Mbjellja e Farave'],
+        aiFeatures: ['Kontroll i spërkatjes i udhëhequr nga AI', 'Aplikim me normë të ndryshueshme', 'Algoritmi i kompensimit të erës'],
+        description: 'AgroSpray Pro përdor sisteme spërkatëse të kontrolluara nga AI për të ofruar pesticide dhe plehra saktësisht ku nevojitet. Zvogëlon përdorimin kimik me 60% duke mbajtur mbrojtjen maksimale të të mbjellave.'
     },
     {
-        id: 3, name: 'TerraScan Elite', tagline: 'Field Mapping & Irrigation Intelligence',
+        id: 3, name: 'TerraScan Elite', tagline: 'Inteligjenca e Hartëzimit të Fushës & Ujitjes',
         img: drone1,
-        price: '$8,999',
+        price: '€8,999',
         specs: [
-            { icon: <Battery size={18} />, label: 'Battery', value: '55 min' },
-            { icon: <Maximize size={18} />, label: 'Coverage', value: '1000 acres' },
-            { icon: <Cpu size={18} />, label: 'AI Engine', value: 'MapAI Pro' },
-            { icon: <Wifi size={18} />, label: 'Resolution', value: '2cm/px' },
+            { icon: <Battery size={18} />, label: 'Bateria', value: '55 min' },
+            { icon: <Maximize size={18} />, label: 'Mbulimi', value: '1000 akra' },
+            { icon: <Cpu size={18} />, label: 'Motori AI', value: 'MapAI Pro' },
+            { icon: <Wifi size={18} />, label: 'Rezolucioni', value: '2cm/px' },
         ],
-        useCases: ['Topographic Mapping', 'Irrigation Monitoring', 'Water Stress Detection', 'Yield Prediction'],
-        aiFeatures: ['High-res orthomosaic generation', 'Thermal water stress mapping', 'Predictive yield modeling'],
-        description: 'The TerraScan Elite generates ultra-high-resolution field maps and uses AI-powered analysis to detect irrigation issues, predict yields, and help optimize planting strategies for farms up to 1000 acres.'
+        useCases: ['Hartëzimi Topologjik', 'Monitorimi i Ujitjes', 'Zbulimi i Mungesës së Ujit', 'Parashikimi i Prodhimit'],
+        aiFeatures: ['Gjenerimi i ortomozaikëve me rezolucion të lartë', 'Hartëzimi termik i mungesës së ujit', 'Modelimi prediktiv i mundesive'],
+        description: 'TerraScan Elite gjeneron hartat e fushave me rezolucion ultra të lartë dhe përdor analizën e fuqizuar me IA për të zbuluar problemet e ujitjes, për të parashikuar prodhimin dhe për të ndihmuar në optimizimin e strategjive të mbjelljes.'
     },
     {
-        id: 4, name: 'HarvestGuard Max', tagline: 'Enterprise-Grade Multi-Drone Platform',
+        id: 4, name: 'HarvestGuard Max', tagline: 'Platforma e Ndërmarrjeve Multi-Dronë',
         img: drone2,
-        price: '$24,999',
+        price: '€24,999',
         specs: [
-            { icon: <Battery size={18} />, label: 'Battery', value: '60 min' },
-            { icon: <Maximize size={18} />, label: 'Coverage', value: '5000 acres' },
-            { icon: <Cpu size={18} />, label: 'AI Engine', value: 'FleetAI' },
-            { icon: <Wifi size={18} />, label: 'Drones', value: 'Up to 5' },
+            { icon: <Battery size={18} />, label: 'Bateria', value: '60 min' },
+            { icon: <Maximize size={18} />, label: 'Mbulimi', value: '5000 akra' },
+            { icon: <Cpu size={18} />, label: 'Motori AI', value: 'FleetAI' },
+            { icon: <Wifi size={18} />, label: 'Dronët', value: 'Deri në 5' },
         ],
-        useCases: ['Full Farm Automation', 'Multi-Drone Fleet Management', 'Comprehensive Analytics', 'Livestock Monitoring'],
-        aiFeatures: ['Fleet coordination AI', 'Enterprise analytics dashboard', 'Predictive maintenance alerts'],
-        description: 'The HarvestGuard Max is our enterprise solution for large-scale operations. Manage up to 5 coordinated drones covering 5000+ acres with centralized AI fleet management and comprehensive analytics.'
+        useCases: ['Automatizimi i Plot i Fermës', 'Menaxhimi i Flotave', 'Analiza Komprehensive', 'Monitorimi i Blegtorisë'],
+        aiFeatures: ['Koordinimi i flotës me AI', 'Panel i analizave për ndërmarrjet', 'Sinjalizime për mirëmbajtje parandaluese'],
+        description: 'HarvestGuard Max është zgjidhja jonë e nivelit të biznesit për operacione në shkallë të gjerë. Menaxhoni deri në 5 dronë të koordinuar që mbulojnë 5000+ akra me administrim te bazuar ne IA dhe analiza komplete.'
     },
 ];
 
 const Products = () => {
+    const [activeAction, setActiveAction] = useState(null); // { drone: object, type: 'buy' | 'rent' }
+    const [formData, setFormData] = useState({
+        name: '', email: '', phone: '', address: '', company: '', purpose: '',
+        duration: '1 Ditë', startDate: '', termsAccepted: false, idNumber: ''
+    });
+    const [isSubmitting, setIsSubmitting] = useState(false);
+    const [orderDone, setOrderDone] = useState(false);
+
+    const handleOrder = async (e) => {
+        e.preventDefault();
+        setIsSubmitting(true);
+
+        const orderData = {
+            droneId: activeAction.drone.id,
+            droneName: activeAction.drone.name,
+            customerName: formData.name,
+            customerEmail: formData.email,
+            customerPhone: formData.phone,
+            orderType: activeAction.type,
+            duration: activeAction.type === 'rent' ? formData.duration : null,
+            startDate: activeAction.type === 'rent' ? formData.startDate : null,
+            address: formData.address,
+            company: formData.company,
+            purpose: activeAction.type === 'rent' ? formData.purpose : null,
+            idNumber: activeAction.type === 'rent' ? formData.idNumber : null,
+            termsAccepted: formData.termsAccepted,
+            price: activeAction.type === 'buy' ? activeAction.drone.price : (activeAction.drone.id * 99) // Mock price calc
+        };
+
+        try {
+            const response = await fetch('http://localhost:5000/api/orders', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(orderData)
+            });
+            const data = await response.json();
+            if (data.success) {
+                setOrderDone(true);
+                setTimeout(() => {
+                    setOrderDone(false);
+                    setActiveAction(null);
+                    setFormData({
+                        name: '', email: '', phone: '', address: '', company: '', purpose: '',
+                        duration: '1 Ditë', startDate: '', termsAccepted: false, idNumber: ''
+                    });
+                }, 3000);
+            }
+        } catch (error) {
+            alert('Pati një gabim gjatë porosisë. Ju lutem provoni përsëri.');
+        } finally {
+            setIsSubmitting(false);
+        }
+    };
+
     return (
         <div className="products-page">
             <section className="products-hero">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
-                        <span className="section-tag">Our Fleet</span>
-                        <h1>AI-Powered <span className="gradient-text">Agricultural Drones</span></h1>
-                        <p>Industry-leading drone technology designed for precision farming at every scale.</p>
+                        <span className="section-tag">Flota Jonë</span>
+                        <h1>Dronë Bujqësorë të Fuqizuar nga <span className="gradient-text">Inteligjenca Artificiale (AI)</span></h1>
+                        <p>Teknologjia e dronëve lider në industri e krijuar për bujqësi precize në çdo shkallë.</p>
                     </motion.div>
                 </div>
             </section>
@@ -114,13 +168,13 @@ const Products = () => {
 
                                     <div className="product-two-cols">
                                         <div>
-                                            <h4>Use Cases</h4>
+                                            <h4>Rastet e Përdorimit</h4>
                                             <ul className="use-cases-list">
                                                 {drone.useCases.map((uc, j) => <li key={j}>✓ {uc}</li>)}
                                             </ul>
                                         </div>
                                         <div>
-                                            <h4>AI Capabilities</h4>
+                                            <h4>Aftësitë e Inteligjencës Artificiale</h4>
                                             <ul className="ai-features-list">
                                                 {drone.aiFeatures.map((af, j) => <li key={j}>⚡ {af}</li>)}
                                             </ul>
@@ -128,11 +182,11 @@ const Products = () => {
                                     </div>
 
                                     <div className="product-actions">
-                                        <Link to="/contact" className="btn-primary" id={`demo-btn-${drone.id}`}>
-                                            Request Demo <ArrowRight size={18} />
-                                        </Link>
-                                        <button className="btn-outline">
-                                            <ShoppingCart size={18} /> Add to Quote
+                                        <button className="btn-primary" onClick={() => setActiveAction({ drone, type: 'buy' })}>
+                                            Blej Tani <ArrowRight size={18} />
+                                        </button>
+                                        <button className="btn-outline" onClick={() => setActiveAction({ drone, type: 'rent' })}>
+                                            Qiraja nga {drone.id === 1 ? '€99' : drone.id === 2 ? '€249' : '€199'}/ditë
                                         </button>
                                     </div>
                                 </div>
@@ -142,30 +196,117 @@ const Products = () => {
                 </div>
             </section>
 
+            {/* Order/Rental Modal */}
+            <AnimatePresence>
+                {activeAction && (
+                    <div className="modal-overlay" onClick={() => setActiveAction(null)}>
+                        <motion.div
+                            className="modal-content glass"
+                            initial={{ opacity: 0, scale: 0.9, y: 20 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 20 }}
+                            onClick={e => e.stopPropagation()}
+                        >
+                            <div className="modal-header">
+                                <h3>{activeAction.type === 'buy' ? 'Porosit' : 'Merr me Qira'} <span className="gradient-text">{activeAction.drone.name}</span></h3>
+                                <button className="close-btn" onClick={() => setActiveAction(null)}>×</button>
+                            </div>
+                            <div className="modal-body">
+                                {orderDone ? (
+                                    <div className="success-message">
+                                        <h3>✓ Faleminderit!</h3>
+                                        <p>Porosia juaj u ruajt me sukses në databazë.</p>
+                                    </div>
+                                ) : (
+                                    <form className="rental-form" onSubmit={handleOrder}>
+                                        <div className="input-group">
+                                            <label>Emri i Plotë</label>
+                                            <input type="text" required value={formData.name} onChange={e => setFormData({ ...formData, name: e.target.value })} placeholder="Emri juaj..." />
+                                        </div>
+                                        <div className="input-group">
+                                            <label>Email</label>
+                                            <input type="email" required value={formData.email} onChange={e => setFormData({ ...formData, email: e.target.value })} placeholder="email@shembull.com" />
+                                        </div>
+                                        <div className="input-group">
+                                            <label>Telefoni</label>
+                                            <input type="tel" required value={formData.phone} onChange={e => setFormData({ ...formData, phone: e.target.value })} placeholder="+383..." />
+                                        </div>
+                                        <div className="input-group">
+                                            <label>Adresa / Lokacioni</label>
+                                            <input type="text" required value={formData.address} onChange={e => setFormData({ ...formData, address: e.target.value })} placeholder="Qyteti, Rruga..." />
+                                        </div>
+
+                                        {activeAction.type === 'buy' && (
+                                            <div className="input-group">
+                                                <label>Kompania / Ferma (Opsionale)</label>
+                                                <input type="text" value={formData.company} onChange={e => setFormData({ ...formData, company: e.target.value })} placeholder="Emri i biznesit tuaj..." />
+                                            </div>
+                                        )}
+
+                                        {activeAction.type === 'rent' && (
+                                            <>
+                                                <div className="input-group">
+                                                    <label>Kohëzgjatja</label>
+                                                    <select value={formData.duration} onChange={e => setFormData({ ...formData, duration: e.target.value })}>
+                                                        <option>1 Ditë</option>
+                                                        <option>3 Ditë</option>
+                                                        <option>7 Ditë</option>
+                                                    </select>
+                                                </div>
+                                                <div className="input-group">
+                                                    <label>Data e Fillimit</label>
+                                                    <input type="date" required value={formData.startDate} onChange={e => setFormData({ ...formData, startDate: e.target.value })} />
+                                                </div>
+                                                <div className="input-group">
+                                                    <label>Qëllimi i Përdorimit</label>
+                                                    <input type="text" required value={formData.purpose} onChange={e => setFormData({ ...formData, purpose: e.target.value })} placeholder="P.sh. Spërkatje misri, Hartëzim toke..." />
+                                                </div>
+                                                <div className="input-group">
+                                                    <label>Nr. Letërnjoftimit (Garanci)</label>
+                                                    <input type="text" required value={formData.idNumber} onChange={e => setFormData({ ...formData, idNumber: e.target.value })} placeholder="Shëno numrin e ID ose pasaportës tuaj..." />
+                                                </div>
+                                                <div className="input-checkbox" style={{ display: 'flex', gap: '10px', alignItems: 'center', marginTop: '10px' }}>
+                                                    <input type="checkbox" id="terms" required checked={formData.termsAccepted} onChange={e => setFormData({ ...formData, termsAccepted: e.target.checked })} style={{ width: 'auto' }} />
+                                                    <label htmlFor="terms" style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>Marr përsipër përgjegjësinë për pajisjen dhe pranoj kushtet e sigurimit gjatë qirasë.</label>
+                                                </div>
+                                            </>
+                                        )}
+
+                                        <button className="btn-primary full-width" type="submit" disabled={isSubmitting}>
+                                            {isSubmitting ? 'Duke procesuar...' : 'Konfirmo Porosinë'}
+                                        </button>
+                                    </form>
+                                )}
+                            </div>
+                        </motion.div>
+                    </div>
+                )}
+            </AnimatePresence>
+
             {/* Comparison Table */}
             <section className="section-padding comparison-section">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                        <span className="section-tag">Compare</span>
-                        <h2>Find the <span className="gradient-text">Right Drone</span> For You</h2>
+                        <span className="section-tag">Krahaso</span>
+                        <h2>Gjeni <span className="gradient-text">Dronin e Duhur</span> Për Ju</h2>
                     </motion.div>
                     <motion.div className="comparison-table-wrap glass" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp} custom={1}>
                         <table className="comparison-table">
                             <thead>
                                 <tr>
-                                    <th>Feature</th>
+                                    <th>Karakteristikat</th>
                                     {drones.map(d => <th key={d.id}>{d.name}</th>)}
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr><td>Price</td>{drones.map(d => <td key={d.id}><strong>{d.price}</strong></td>)}</tr>
-                                <tr><td>Battery Life</td>{drones.map(d => <td key={d.id}>{d.specs[0].value}</td>)}</tr>
-                                <tr><td>Coverage</td>{drones.map(d => <td key={d.id}>{d.specs[1].value}</td>)}</tr>
-                                <tr><td>AI Engine</td>{drones.map(d => <td key={d.id}>{d.specs[2].value}</td>)}</tr>
-                                <tr><td>Crop Monitoring</td><td>✓</td><td>—</td><td>✓</td><td>✓</td></tr>
-                                <tr><td>Precision Spraying</td><td>—</td><td>✓</td><td>—</td><td>✓</td></tr>
-                                <tr><td>Field Mapping</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr>
-                                <tr><td>Fleet Management</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
+                                <tr><td>Çmimi</td>{drones.map(d => <td key={d.id}><strong>{d.price}</strong></td>)}</tr>
+                                <tr><td>Jetëgjatësia e Baterisë</td>{drones.map(d => <td key={d.id}>{d.specs[0].value}</td>)}</tr>
+                                <tr><td>Mbulimi</td>{drones.map(d => <td key={d.id}>{d.specs[1].value}</td>)}</tr>
+                                <tr><td>Motori AI</td>{drones.map(d => <td key={d.id}>{d.specs[2].value}</td>)}</tr>
+                                <tr><td>Monitorimi i të Mbjellave</td><td>✓</td><td>—</td><td>✓</td><td>✓</td></tr>
+                                <tr><td>Spërkatja me Precizion</td><td>—</td><td>✓</td><td>—</td><td>✓</td></tr>
+                                <tr><td>Hartëzimi i Fushës</td><td>—</td><td>—</td><td>✓</td><td>✓</td></tr>
+                                <tr><td>Menaxhimi i Flotave</td><td>—</td><td>—</td><td>—</td><td>✓</td></tr>
                             </tbody>
                         </table>
                     </motion.div>

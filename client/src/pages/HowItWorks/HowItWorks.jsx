@@ -2,6 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Smartphone, Plane, Camera, Brain, BarChart3, ArrowRight, ChevronDown } from 'lucide-react';
+import DroneSimulation from '../../components/DroneSimulation';
 import './HowItWorks.css';
 
 const fadeUp = {
@@ -14,42 +15,42 @@ const steps = [
     {
         number: '01',
         icon: <Smartphone size={32} />,
-        title: 'Flight Planning',
-        subtitle: 'Mobile App Control',
-        desc: 'Use our intuitive mobile app to define your flight area, set parameters like altitude and overlap, and schedule autonomous missions. The AI optimizes the flight path based on your farm layout.',
-        details: ['GPS waypoint creation', 'Custom altitude settings', 'Scheduled missions', 'Weather-aware planning']
+        title: 'Planifikimi i Fluturimit',
+        subtitle: 'Kontrolli nga Aplikacioni',
+        desc: 'Përdorni aplikacionin tonë intuitiv për të përcaktuar zonën tuaj të fluturimit, vendosni parametrat si lartësia dhe mbivendosja, dhe planifikoni misione autonome. IA optimizon rrugën e fluturimit bazuar në paraqitjen e fermës suaj.',
+        details: ['Krijimi i pikave GPS', 'Cilësime të personalizuara të lartësisë', 'Misione të planifikuara', 'Planifikim i ndërgjegjshëm për motin']
     },
     {
         number: '02',
         icon: <Plane size={32} />,
-        title: 'Autonomous Flight',
-        subtitle: 'Smart Navigation',
-        desc: 'Your drone takes off and navigates the planned route autonomously. Obstacle avoidance and real-time adjustments ensure safe, efficient coverage of your entire field.',
-        details: ['Obstacle avoidance', 'Auto return-to-home', 'Real-time telemetry', 'Wind compensation']
+        title: 'Fluturim Autonom',
+        subtitle: 'Navigim Inteligjent',
+        desc: 'Droni juaj ngrihet dhe lundron në rrugën e planifikuar në mënyrë autonome. Shmangia e pengesave dhe rregullimet në kohë reale sigurojnë mbulim të sigurt dhe efikas të të gjithë fushës suaj.',
+        details: ['Shmangia e pengesave', 'Kthim automatik në shtëpi', 'Telemetri në kohë reale', 'Kompensimi i erës']
     },
     {
         number: '03',
         icon: <Camera size={32} />,
-        title: 'Data Collection',
-        subtitle: 'Multi-Sensor Capture',
-        desc: 'High-resolution RGB, multispectral, and thermal sensors capture comprehensive data about your crops and soil conditions throughout the flight.',
-        details: ['RGB imaging (4K)', 'NDVI multispectral', 'Thermal imaging', 'LiDAR elevation data']
+        title: 'Mbledhja e të Dhënave',
+        subtitle: 'Regjistrim Multi-Sensor',
+        desc: 'Sensorët me rezolucion të lartë RGB, multispektral dhe termik regjistrojnë të dhëna gjithëpërfshirëse rreth të mbjellave dhe kushteve të tokës gjatë gjithë fluturimit.',
+        details: ['Imazhe RGB (4K)', 'Multispektral NDVI', 'Imazhe termike', 'Të dhëna lartësie LiDAR']
     },
     {
         number: '04',
         icon: <Brain size={32} />,
-        title: 'AI Analysis',
-        subtitle: 'Intelligent Processing',
-        desc: 'Our AI engine processes the collected data using computer vision and machine learning algorithms to identify crop stress, diseases, nutrient deficiencies, and water issues.',
-        details: ['Disease detection', 'Nutrient analysis', 'Weed identification', 'Water stress mapping']
+        title: 'Analiza me IA',
+        subtitle: 'Përpunim Inteligjent',
+        desc: 'Motori ynë i IA përpunon të dhënat e mbledhura duke përdorur vizionin kompjuterik dhe algoritmet e mësimit makinerik për të identifikuar problemet e të mbjellave, sëmundjet, mungesat e lëndëve ushqyese dhe problemet e ujit.',
+        details: ['Zbulimi i sëmundjeve', 'Analiza e lëndëve ushqyese', 'Identifikimi i barërave të këqija', 'Hartëzimi i mungesës së ujit']
     },
     {
         number: '05',
         icon: <BarChart3 size={32} />,
-        title: 'Dashboard Reports',
-        subtitle: 'Actionable Insights',
-        desc: 'Access detailed reports and visualizations through our farmer dashboard. Get recommendations on treatment, irrigation, and harvesting optimized by AI predictive models.',
-        details: ['Interactive field maps', 'Trend analytics', 'Treatment recommendations', 'Yield predictions']
+        title: 'Raportet e Panelit',
+        subtitle: 'Konkluzione të Veprueshme',
+        desc: 'Hyni në raporte të detajuara dhe vizualizime përmes panelit tonë të fermerit. Merrni rekomandime për trajtimin, ujitjen dhe korrjen e optimizuar nga modelet parashikuese të IA.',
+        details: ['Harta interaktive të fushës', 'Analitikë e trendeve', 'Rekomandime trajtimi', 'Parashikime rendimenti']
     },
 ];
 
@@ -59,9 +60,18 @@ const HowItWorks = () => {
             <section className="hiw-hero">
                 <div className="container">
                     <motion.div className="section-header" initial="hidden" animate="visible" variants={fadeUp}>
-                        <span className="section-tag">How It Works</span>
-                        <h1>From Takeoff to <span className="gradient-text">Actionable Insights</span></h1>
-                        <p>Discover the five-step process that transforms raw field data into intelligent farming decisions.</p>
+                        <span className="section-tag">Si Funksionon</span>
+                        <h1>Nga Ngritja te <span className="gradient-text">Konkluzionet e Veprueshme</span></h1>
+                        <p>Zbuloni procesin me pesë hapa që transformon të dhënat e papërpunuara të fushës në vendime inteligjente bujqësore.</p>
+                    </motion.div>
+
+                    <motion.div
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ delay: 0.4 }}
+                        style={{ marginTop: '50px' }}
+                    >
+                        <DroneSimulation />
                     </motion.div>
                 </div>
             </section>
@@ -100,9 +110,9 @@ const HowItWorks = () => {
             <section className="section-padding">
                 <div className="container">
                     <motion.div className="hiw-cta glass" initial="hidden" whileInView="visible" viewport={{ once: true }} variants={fadeUp}>
-                        <h2>See It in Action</h2>
-                        <p>Schedule a live demo and watch our AI drones transform data into actionable insights for your farm.</p>
-                        <Link to="/contact" className="btn-primary" id="hiw-demo-btn">Book a Demo <ArrowRight size={20} /></Link>
+                        <h2>Shikojeni në Veprim</h2>
+                        <p>Planifikoni një demo të drejtpërdrejtë dhe shikoni sesi dronët tanë me IA transformojnë të dhënat në konkluzione të veprueshme për fermën tuaj.</p>
+                        <Link to="/contact" className="btn-primary" id="hiw-demo-btn">Rezervo një Demo <ArrowRight size={20} /></Link>
                     </motion.div>
                 </div>
             </section>

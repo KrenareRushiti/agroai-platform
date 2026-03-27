@@ -1,11 +1,63 @@
 const express = require('express');
 const cors = require('cors');
 const dotenv = require('dotenv');
+const sqlite3 = require('sqlite3');
+const { open } = require('sqlite');
 
 dotenv.config();
 
 const app = express();
 const PORT = process.env.PORT || 5000;
+
+let db;
+
+// Initialize SQLite Database
+(async () => {
+    db = await open({
+        filename: './database.sqlite',
+        driver: sqlite3.Database
+    });
+    console.log('🚀 Connected to SQLite Database (AgroAgro AI)');
+
+    // Temporarily drop tables to rebuild schema exactly
+    // Temporarily drop tables to rebuild schema exactly
+    await db.exec(`
+        DROP TABLE IF EXISTS Orders;
+        DROP TABLE IF EXISTS Inquiries;
+
+        CREATE TABLE IF NOT EXISTS Orders (
+            _id INTEGER PRIMARY KEY AUTOINCREMENT,
+            droneId INTEGER,
+            droneName TEXT,
+            customerName TEXT NOT NULL,
+            customerEmail TEXT NOT NULL,
+            customerPhone TEXT,
+            address TEXT,
+            company TEXT,
+            orderType TEXT NOT NULL,
+            price TEXT,
+            duration TEXT,
+            startDate TEXT,
+            purpose TEXT,
+            idNumber TEXT,
+            termsAccepted BOOLEAN,
+            status TEXT DEFAULT 'Pending',
+            createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+
+        CREATE TABLE IF NOT EXISTS Inquiries (
+            _id INTEGER PRIMARY KEY AUTOINCREMENT,
+            name TEXT NOT NULL,
+            email TEXT NOT NULL,
+            phone TEXT,
+            subject TEXT,
+            message TEXT NOT NULL,
+            farmSize TEXT,
+            status TEXT DEFAULT 'New',
+            createdAt DATETIME DEFAULT CURRENT_TIMESTAMP
+        );
+    `);
+})();
 
 // Middleware
 app.use(cors());
@@ -59,45 +111,45 @@ const knowledgeBase = {
 const getAIResponse = (message) => {
     const lower = message.toLowerCase();
 
-    if (lower.match(/drone|product|model|fleet/)) {
+    if (lower.match(/drone|product|model|fleet|dron|produkt/)) {
         const droneList = knowledgeBase.drones.map(d =>
-            `• ${d.name} ($${d.price.toLocaleString()}) - ${d.description}`
+            `• ${d.name} (€${d.price.toLocaleString()}) - ${d.description}`
         ).join('\n');
-        return `Here are our AI-powered drones:\n\n${droneList}\n\nWhich one interests you?`;
+        return `Këtu janë dronët tanë të fuqizuar nga AI:\n\n${droneList}\n\nCili ju intereson?`;
     }
 
-    if (lower.match(/price|pricing|cost|plan/)) {
+    if (lower.match(/price|pricing|cost|plan|çmim|pagesë/)) {
         const plans = Object.values(knowledgeBase.pricing).map(p =>
-            `• ${p.name}: $${p.price}/${p.period} (${p.coverage})`
+            `• ${p.name}: €${p.price}/${p.period} (${p.coverage})`
         ).join('\n');
-        return `Our pricing plans:\n\n${plans}\n\nAll plans include a 14-day free trial!`;
+        return `Planet tona të çmimeve:\n\n${plans}\n\nÇdo plan përfshin një provë falas 14-ditore!`;
     }
 
-    if (lower.match(/recommend|suggest|best|which/)) {
-        return "I'd love to help! Could you share:\n1. Your farm size (in acres)?\n2. Main need (monitoring, spraying, mapping, or all-in-one)?";
+    if (lower.match(/recommend|suggest|best|which|rekomando|sugjero/)) {
+        return "Do të dëshironim t'ju ndihmonim! Mund të ndanit:\n1. Madhësinë e fermës suaj (në akra)?\n2. Nevojën kryesore (monitorim, spërkatje, hartëzim, etj.)?";
     }
 
-    if (lower.match(/small|under 100/)) {
-        return `For smaller farms, I recommend the AeroScout X1 ($4,999) with our Starter Plan ($299/mo). Great for crop monitoring up to 100 acres.`;
+    if (lower.match(/small|under 100|vogël/)) {
+        return `Për ferma më të vogla, unë rekomandoj AeroScout X1 (€4,999) me Planin tonë Fillestar (€299/muaj). I shkëlqyer për monitorimin e të mbjellave deri në 100 akra.`;
     }
 
-    if (lower.match(/medium|100.*500/)) {
-        return `For mid-size farms, the Professional Plan ($799/mo) with AeroScout X1 + AgroSpray Pro is ideal. Full AI analytics and precision spraying for up to 500 acres.`;
+    if (lower.match(/medium|100.*500|mesatar/)) {
+        return `Për ferma të mesme, Plani Profesional (€799/muaj) me AeroScout X1 + AgroSpray Pro është ideal. Analitikë e plotë e AI dhe spërkatje precize deri në 500 akra.`;
     }
 
-    if (lower.match(/large|enterprise|big|500/)) {
-        return `For large operations, our Enterprise Plan ($1,999/mo) with HarvestGuard Max supports up to 5 coordinated drones covering unlimited acreage, plus dedicated support.`;
+    if (lower.match(/large|enterprise|big|500|madhe/)) {
+        return `Për operacione të mëdha, Plani ynë i Ndërmarrjes (€1,999/muaj) me HarvestGuard Max mbështet deri në 5 dronë të koordinuar, plus mbështetje të dedikuar.`;
     }
 
-    if (lower.match(/demo|book|schedule/)) {
-        return "Book a demo through our Contact page or call +1 (555) 123-4567. We offer both in-field and virtual demos — completely free!";
+    if (lower.match(/demo|book|schedule|rezervo/)) {
+        return "Rezervoni një demo përmes faqes sonë të Kontaktit ose na telefononi në +383 44 123 456. Ne ofrojmë demo falas!";
     }
 
-    if (lower.match(/hello|hi|hey/)) {
-        return "Hello! 👋 I'm AeroBot, your AI farming assistant. I can help with drone info, recommendations, pricing, and demo booking. What would you like to know?";
+    if (lower.match(/hello|hi|hey|përshëndetje|tung/)) {
+        return "Përshëndetje! 👋 Unë jam AeroBot, asistenti juaj i bujqësisë AI. Mund t'ju ndihmoj me informacion për dronët, rekomandime, çmime dhe rezervime. Çfarë dëshironi të dini?";
     }
 
-    return "I can help with:\n• Drone products & specs\n• Pricing plans\n• Farm-specific recommendations\n• Booking demos\n\nWhat interests you?";
+    return "Unë mund t'ju ndihmoj me:\n• Produkte dhe specifika dronësh\n• Plane çmimesh\n• Rekomandime për fermën tuaj\n• Rezervime demo\n\nÇfarë ju intereson?";
 };
 
 app.post('/api/chat', (req, res) => {
@@ -127,45 +179,85 @@ app.get('/api/pricing', (req, res) => {
 });
 
 // ============= CONTACT/INQUIRY ENDPOINT =============
-const inquiries = [];
-
-app.post('/api/contact', (req, res) => {
+app.post('/api/contact', async (req, res) => {
     const { name, email, phone, subject, message, farmSize } = req.body;
     if (!name || !email || !message) {
         return res.status(400).json({ error: 'Name, email, and message are required' });
     }
 
-    const inquiry = {
-        id: inquiries.length + 1,
-        name, email, phone, subject, message, farmSize,
-        date: new Date().toISOString(),
-        status: 'New'
-    };
-    inquiries.push(inquiry);
-    res.status(201).json({ success: true, message: 'Inquiry received!', id: inquiry.id });
+    try {
+        const result = await db.run(
+            'INSERT INTO Inquiries (name, email, phone, subject, message, farmSize) VALUES (?, ?, ?, ?, ?, ?)',
+            [name, email, phone, subject, message, farmSize]
+        );
+        res.status(201).json({ success: true, message: 'Inquiry received!', id: result.lastID });
+    } catch (err) {
+        console.error('Contact error:', err);
+        res.status(500).json({ error: 'Database error while saving inquiry' });
+    }
 });
 
-app.get('/api/inquiries', (req, res) => {
-    res.json(inquiries);
+app.get('/api/inquiries', async (req, res) => {
+    try {
+        const data = await db.all('SELECT * FROM Inquiries ORDER BY createdAt DESC');
+        res.json(data);
+    } catch (err) {
+        console.error('Inquiries GET error:', err);
+        res.status(500).json({ error: 'Database error while fetching inquiries' });
+    }
 });
 
-// ============= DEMO BOOKING ENDPOINT =============
-const demoBookings = [];
+// ============= ORDERS ENDPOINT =============
+app.post('/api/orders', async (req, res) => {
+    const { droneId, droneName, customerName, customerEmail, customerPhone, address, company, orderType, price, duration, startDate, purpose, idNumber, termsAccepted } = req.body;
 
-app.post('/api/demo', (req, res) => {
-    const { name, email, company, date, farmSize, notes } = req.body;
-    if (!name || !email || !date) {
-        return res.status(400).json({ error: 'Name, email, and date are required' });
+    if (!droneId || !customerEmail || !orderType || !address) {
+        return res.status(400).json({ error: 'Missing required order details' });
     }
 
-    const booking = {
-        id: demoBookings.length + 1,
-        name, email, company, date, farmSize, notes,
-        createdAt: new Date().toISOString(),
-        status: 'Pending'
-    };
-    demoBookings.push(booking);
-    res.status(201).json({ success: true, message: 'Demo booked!', id: booking.id });
+    try {
+        const result = await db.run(
+            'INSERT INTO Orders (droneId, droneName, customerName, customerEmail, customerPhone, address, company, orderType, price, duration, startDate, purpose, idNumber, termsAccepted) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)',
+            [droneId, droneName, customerName, customerEmail, customerPhone, address, company, orderType, price, duration, startDate, purpose, idNumber, termsAccepted]
+        );
+        res.status(201).json({
+            success: true,
+            message: orderType === 'buy' ? 'Porosia u krye me sukses!' : 'Rezervimi i qerasë u krye!',
+            orderId: result.lastID
+        });
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: 'Gabim gjatë procesimit të porosisë' });
+    }
+});
+
+app.get('/api/orders', async (req, res) => {
+    try {
+        const data = await db.all('SELECT * FROM Orders ORDER BY createdAt DESC');
+        res.json(data);
+    } catch (err) {
+        console.error('Orders GET error:', err);
+        res.status(500).json({ error: 'Database error' });
+    }
+});
+
+// ============= DELETE ENDPOINTS (Helper for Admin Dashboard if needed) =============
+app.delete('/api/orders/:id', async (req, res) => {
+    try {
+        await db.run('DELETE FROM Orders WHERE _id = ?', req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete' });
+    }
+});
+
+app.delete('/api/inquiries/:id', async (req, res) => {
+    try {
+        await db.run('DELETE FROM Inquiries WHERE _id = ?', req.params.id);
+        res.json({ success: true });
+    } catch (err) {
+        res.status(500).json({ error: 'Failed to delete' });
+    }
 });
 
 // ============= NEWSLETTER =============

@@ -332,6 +332,21 @@
     color: var(--text-muted);
 }
 
+.status-badge.confirmed {
+    background: rgba(16, 185, 129, 0.15);
+    color: #10b981;
+}
+
+.status-badge.pending {
+    background: rgba(245, 158, 11, 0.15);
+    color: #f59e0b;
+}
+
+.status-badge.completed {
+    background: rgba(59, 130, 246, 0.15);
+    color: #3b82f6;
+}
+
 .category-badge {
     padding: 0.3rem 0.8rem;
     background: rgba(27, 79, 114, 0.2);
