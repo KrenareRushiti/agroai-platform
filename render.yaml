@@ -15,9 +15,5 @@ services:
   # Frontend Client (Static Site)
   - type: static
     name: agroai-client
-    rootDir: client
-    buildCommand: npm install && npm run build
-    staticPublishPath: dist
-    envVars:
-      - key: VITE_API_URL
-        value: https://agroai-server.onrender.com # Kjo do të duhet të përditësohet pas deployment
+    buildCommand: cd client && npm install && npm run build
+    staticPublishPath: client/dist
