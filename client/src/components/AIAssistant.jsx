@@ -1,26 +1,25 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { MessageSquare, X, Send, Brain, User, ChevronDown } from 'lucide-react';
 import './AIAssistant.css';
+import API_URL from '../config';
 
 const knowledgeBase = {
-    greeting: "Përshëndetje! 👋 Unë jam AeroBot, arkitekti juaj i fermës me IA. Unë mund t'ju ndihmoj të optimizoni fermën tuaj me teknologjinë e dronëve.\n\nMë pyesni për:\n• Rekomandime për dronë bazuar në madhësinë e fermës suaj\n• Jetëgjatësia e baterisë dhe specifikat e mbulimit\n• Strategji për spërkatje me precizion\n• Hartëzimi dhe analiza e ujitjes\n\nSa hektarë po menaxhoni sot?",
+    greeting: "Përshëndetje! 👋 Unë jam AeroBot, arkitekti juaj i fermës me Inteligjencë Artificiale. Unë mund t'ju ndihmoj të optimizoni fermën tuaj me teknologjinë e dronëve.\n\nMë pyesni për:\n• Rekomandime për dronë bazuar në madhësinë e fermës suaj\n• Jetëgjatësia e baterisë dhe specifikat e mbulimit\n• Strategji për spërkatje me precizion\n• Hartëzimi dhe analiza e ujitjes\n\nSa hektarë po menaxhoni sot?",
 
     responses: {
-        drone: "Flota jonë përfshin:\n\n🛩 **AeroScout X1**: Monitorimi i të mbjellave ($4,999). Më i miri për zbulimin e sëmundjeve dhe problemeve të bimëve.\n🛩 **AgroSpray Pro**: Spërkatje me precizion ($12,499). Ul përdorimin e kimikateve me 60%.\n🛩 **TerraScan Elite**: Hartëzim & Ujitje ($8,999). Topografi me rezolucion të lartë dhe harta për mungesën e ujit.\n🛩 **HarvestGuard Max**: Flotë për ndërmarrje ($24,999). Koordinon deri në 5 dronë për operacione të mëdha.",
+        drone: "Flota jonë përfshin:\n\n🛩 **AeroScout X1**: Monitorimi i të mbjellave (€4,999). Më i miri për zbulimin e sëmundjeve dhe problemeve të bimëve.\n🛩 **AgroSpray Pro**: Spërkatje me precizion (€12,499). Ul përdorimin e kimikateve me 60%.\n🛩 **TerraScan Elite**: Hartëzim & Ujitje (€8,999). Topografi me rezolucion të lartë dhe harta për mungesën e ujit.\n🛩 **HarvestGuard Max**: Flotë për ndërmarrje (€24,999). Koordinon deri në 5 dronë për operacione të mëdha.",
 
         hectares: (h) => {
             if (h < 20) return `Për ${h} hektarë, **AeroScout X1** është i përsosur. Ai mund të mbulojë deri në 500 akra (afërsisht 200 ha) në një mision të vetëm. Do t'ju nevojiten vetëm 1-2 bateri për një ditë të plotë monitorimi.`;
             if (h < 100) return `Për ${h} hektarë, unë rekomandoj **AgroSpray Pro** për trajtim ose **TerraScan Elite** për hartëzim. Me gjasë do t'ju nevojiten 3-4 bateri dhe 2-3 fluturime për të mbuluar zonën plotësisht.`;
-            return `Për një operacion të madh prej ${h} hektarësh, duhet të merrni në konsideratë flotën e ndërmarrjes **HarvestGuard Max**. Ai lejon koordinimin e shumë dronëve për të mbuluar zona të mëdha në një fraksion kohe.`;
+            return `Për një operacion të madh prej ${h} hektarësh (mbi 100 ha), duhet të merrni në konsideratë flotën e ndërmarrjes **HarvestGuard Max**. Ai lejon koordinimin e shumë dronëve për të mbuluar zona të mëdha në një kohë rekord.`;
         },
 
-        battery: "Bateritë e dronëve zakonisht zgjasin 35–60 minuta në varësi të modelit dhe ngarkesës. \n\n• **X1**: 45 min\n• **AgroSpray**: 35 min (më i rëndë për shkak të rezervuarit)\n• **TerraScan**: 55 min\n• **HarvestGuard**: 60 min.\n\nNe rekomandojmë një rrotullim 'Tre-Bateri' (një në fluturim, një duke u karikuar, një gati) për operacion të vazhdueshëm.",
+        battery: "Bateritë e dronëve tona zgjasin nga 35 deri në 60 minuta në varësi të modelit:\n\n• **AeroScout X1**: 45 min\n• **AgroSpray Pro**: 35 min\n• **TerraScan Elite**: 55 min\n• **HarvestGuard Max**: 60 min.\n\nNe rekomandojmë sistemin 'Tre-Bateri' për fluturim të pandërprerë.",
 
-        spraying: "Sistemi ynë inteligjent i spërkatjes përdor **Aplikim me Normë të Ndryshueshme (VRA)**. Analizon shëndetin e të mbjellave në kohë reale dhe spërkat vetëm aty ku zbulohet ndonjë problem ose dëmtues. Kjo mund të kursejë deri në 60% të pesticideve dhe 40% në pleh.",
+        spraying: "Sistemi ynë i spërkatjes përdor AI për të kursyer deri në 60% të pesticideve. Spërkat vetëm aty ku detektohet nevoja.",
 
-        mapping: "Hartëzimi ju ndihmon të vizualizoni mungesën e ujit, shëndetin e tokës (NDVI) dhe ndryshimet topografike. **TerraScan Elite** yni prodhon harta me rezolucion 2cm/pixel, të përsosura për planifikimin e ujitjes me precizion.",
+        mapping: "Hartëzimi ju ndihmon të shihni lagështinë dhe shëndetin e tokës. **TerraScan Elite** prodhon harta me saktësi 2cm/piksel.",
 
-        default: "Unë mund t'ju ndihmoj me specifikat e dronëve, llogaritjet e efikasitetit dhe strategjitë bujqësore. \n\nProvo të pyesësh: 'Cili dron për 50 hektarë?' ose 'Sa zgjat bateria?'"
+        default: "Mund t'ju ndihmoj me informacion për:\n• Produkte dhe specifika\n• Plane çmimesh\n• Rekomandime për fermën tuaj\n• Rezervime demo\n\nÇfarë ju intereson?"
     }
 };
 
@@ -71,7 +70,7 @@ const AIAssistant = () => {
         setIsTyping(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/chat', {
+            const response = await fetch(`${API_URL}/api/chat`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify({ message: userMessage.content })

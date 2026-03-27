@@ -1,7 +1,5 @@
-import React, { useState } from 'react';
-import { motion } from 'framer-motion';
-import { BarChart3, Package, FileText, MessageSquare, Database, Users, Plus, Edit2, Trash2, Eye, TrendingUp, DollarSign, Globe, Activity, Lock, LogIn, ChevronDown, Image, Save } from 'lucide-react';
 import './AdminDashboard.css';
+import API_URL from '../../config';
 
 const fadeUp = {
     hidden: { opacity: 0, y: 20 },
@@ -22,11 +20,11 @@ const AdminDashboard = () => {
     const fetchData = async () => {
         setLoading(true);
         try {
-            const resOrders = await fetch('http://localhost:5000/api/orders');
+            const resOrders = await fetch(`${API_URL}/api/orders`);
             const dataOrders = await resOrders.json();
             setOrders(dataOrders);
 
-            const resInquiries = await fetch('http://localhost:5000/api/inquiries');
+            const resInquiries = await fetch(`${API_URL}/api/inquiries`);
             const dataInquiries = await resInquiries.json();
             setInquiries(dataInquiries);
         } catch (error) {
